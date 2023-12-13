@@ -6,7 +6,7 @@ This project involves creating a C program that performs a pipe operation simila
 It must behave exactly the same as the shell command below:
 
 ``` sh
-$ < file1 cmd1 | cmd2 > file2
+$> < file1 cmd1 | cmd2 > file2
 ```
 
 # References
