@@ -1,24 +1,43 @@
-#include <errno.h>
-#include<string.h>
-#include <fcntl.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
 int main()
 {
-	int array[2];
-	char str1[100];
-	char str2[100];
-	if (pipe(array) == -1)
+	int	fd[2];
+	if (pipe(fd) == -1)
+		return (1);
+	
+	int pid1 = fork();
+	if (pid1 < 0)
+		return (2);
+
+	if (pid1 == 0) // Child process 1 (ping)
 	{
-	 	perror("Filed to create pipe");
-	   	exit(1);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execlp("ping", "ping", "-c", "5", "google.com", NULL);
 	}
-	scanf("%s", str1);
-	write(array[1], str1, strlen(str1)+1);
-	printf("\n");
-	read(array[0], str2, 100);
-	printf("%s", str2);
-	printf("\n");
+
+	int	pid2 = fork();
+	if (pid2 < 0)
+		return (3);
+
+	if (pid2 == 0) // Child process 2 (grep)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execlp("grep", "grep", "rtt", NULL);
+
+	}
+
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	return (0);
 }
