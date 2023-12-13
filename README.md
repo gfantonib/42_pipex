@@ -1,7 +1,9 @@
 # 42_pipex
 
-<img class="aligncenter size-large wp-image-3831 img-responsive" 
-src="https://1.bp.blogspot.com/-4R8XL3LCi1A/Xi-_FwlS1vI/AAAAAAAAQdo/RLf7eZCAWO4QOm8oR1Wn99C21nrjnxBuwCLcBGAsYHQ/s1600/images.jpeg"> 
+<p align="center">
+  <img src="https://1.bp.blogspot.com/-4R8XL3LCi1A/Xi-_FwlS1vI/AAAAAAAAQdo/RLf7eZCAWO4QOm8oR1Wn99C21nrjnxBuwCLcBGAsYHQ/s1600/images.jpeg" 
+  alt="Image Description">
+</p>
 
 Conceptually, a pipe is a connection between two processes, such that the standard output from one process becomes the standard input of the other process. In UNIX Operating System, Pipes are useful for communication between related processes(inter-process communication).
 
