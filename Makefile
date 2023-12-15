@@ -1,6 +1,7 @@
 NAME := pipex
 
 LIBFT = libft/libft.a
+LIBFT_PATH = libft/
 
 CFLAGS	:= -Wextra -Wall -Werror
 HEADERS	:= -Iincludes
@@ -29,9 +30,11 @@ $(NAME): $(OBJS)
 clean:
 	rm -rf $(OBJS)
 	rm -rf $(OBJECTS_PATH)
+	make clean -C $(LIBFT_PATH)
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -C $(LIBFT_PATH)
 
 re: fclean all
 
