@@ -17,21 +17,25 @@ int	main(void)
 	id = fork();
 	if (id == 0)
 	{
-		printf("------------------------child ------------------------\n");
+		printf("------------------------ child ------------------------\n");
 		printf("str = %s | add = %p\n", str, &str[0]);
-		str[0] = '1';
+		//str[0] = '1';
 		printf("after modification str = %s | add = %p\n", str, &str[0]);
 		printf("%d\n", id);
 		printf("str[0]:%c\n", str[0]);
-		exit(1);
+		//free(str);
+		//exit(1);
 	}
 	else
 	{	
 		wait(NULL);
-		printf("------------------------parent ------------------------\n");
+		printf("------------------------ parent ------------------------\n");
 		printf("str = %s | add = %p\n", str, &str[0]);
+		str[0] = '1';
 		printf("%d\n", id);
 		printf("str[0]:%c\n", str[0]);
+		//free(str);
 	}
+	free(str);
 	return (0);
 }
