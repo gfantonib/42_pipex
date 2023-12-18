@@ -26,6 +26,7 @@ typedef	struct s_pipex
 void	error_message(int flag);
 void	get_commands(t_pipex *pipex, char **argv);
 void	get_commands_path(t_pipex *pipex, char **envp);
+void	free_cmd(char **path);
 char	*get_path(char *cmd, char **envp);
 void	execute_commands(t_pipex *pipex);
 void	child_process_1(t_pipex *pipex, int *fd);

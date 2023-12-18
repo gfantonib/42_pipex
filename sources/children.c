@@ -6,6 +6,8 @@ void	child_process_1(t_pipex *pipex, int *fd)
 		int		fdin;
 
 		fdin = open(pipex->infile, O_RDONLY, 0777);
+		if (fdin == -1)
+			error_message(5);
 		dup2(fd[1], STDOUT_FILENO);
 		dup2(fdin, STDIN_FILENO);
 		close(fd[0]);
@@ -19,6 +21,8 @@ void	child_process_2(t_pipex *pipex, int *fd)
 		int		fdout;
 
 		fdout = open(pipex->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		if (fdout == -1)
+			error_message(5);
 		dup2(fd[0], STDIN_FILENO);
 		dup2(fdout, STDOUT_FILENO);
 		close(fd[0]);
