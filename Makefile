@@ -3,7 +3,7 @@ NAME := pipex
 LIBFT = libft/libft.a
 LIBFT_PATH = libft/
 
-CFLAGS	:= -Wextra -Wall -Werror
+CFLAGS	:= -Wextra -Wall -Werror -g
 HEADERS	:= -Iincludes
 MK = mkdir -p
 

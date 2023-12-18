@@ -77,8 +77,8 @@ int main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		error_message(1);
 
-	t_pipex	*pipex = NULL;
-	get_cmd_and_path(pipex, argv, envp);
+	t_pipex	pipex;
+	get_cmd_and_path(&pipex, argv, envp);
 
 	int	fd[2];
 	if (pipe(fd) == -1)
@@ -89,14 +89,14 @@ int main(int argc, char **argv, char **envp)
 		error_message(2);
 
 	if (pid1 == 0) // Child process 1 (ping)
-		child_process_1(pipex, fd);
+		child_process_1(&pipex, fd);
 
 	int	pid2 = fork();
 	if (pid2 < 0)
 		error_message(2);
 
 	if (pid2 == 0) // Child process 2 (grep)
-		child_process_2(pipex, fd);
+		child_process_2(&pipex, fd);
 
 	close(fd[0]);
 	close(fd[1]);
