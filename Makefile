@@ -11,6 +11,7 @@ SOURCE_PATH = sources/
 
 SRCS	:= \
 			pipex.c \
+			utils.c \
 
 OBJECTS_PATH = objects
 OBJS	:= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
