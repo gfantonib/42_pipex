@@ -12,5 +12,7 @@ int main(int argc, char **argv, char **envp)
 
 	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
+
+	free_all(&pipex);
 	return (0);
 }

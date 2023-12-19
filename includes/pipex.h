@@ -21,16 +21,19 @@ typedef	struct s_pipex
 	int		pid1;
 	int		pid2;
 
+	int		error_flag;
+
 }		t_pipex;
 
 void	error_message(int flag);
 void	get_commands(t_pipex *pipex, char **argv);
 void	get_commands_path(t_pipex *pipex, char **envp);
-void	free_cmd(char **path);
+void	free_split(char **split);
 char	*get_path(char *cmd, char **envp);
 void	execute_commands(t_pipex *pipex);
 void	child_process_1(t_pipex *pipex, int *fd);
 void	child_process_2(t_pipex *pipex, int *fd);
+void	free_all(t_pipex *pipex);
 
 
 

@@ -14,21 +14,38 @@ void	error_message(int flag)
 		puts("open error");
 	else if (flag == 6)
 		puts("command error");
+	else if (flag == 7)
+		puts("file_name error");
+	else if (flag == 8)
+		puts("success!");
 	exit(EXIT_FAILURE);
 }
 
-void	free_cmd(char **cmd)
+void	free_split(char **split)
 {
 	int	i;
 
 	i = 0;
-	while(cmd[i])
+	while(split[i])
 	{
-		free(cmd[i]);
+		free(split[i]);
 		i++;
 	}
-	free(cmd);
-	error_message(6);
+	free(split);
+}
+
+void	free_all(t_pipex *pipex)
+{
+	free_split(pipex->cmd1);
+	free_split(pipex->cmd2);
+
+	free(pipex->infile);
+	free(pipex->outfile);
+
+	free(pipex->path_cmd1);
+	free(pipex->path_cmd2);
+	
+	error_message(8);
 }
 
 char	*get_path(char *cmd, char **envp)
@@ -49,13 +66,13 @@ char	*get_path(char *cmd, char **envp)
 		path = ft_strjoin(part_path, cmd);
 		free(part_path);
 		if (access(path, F_OK) == 0)
+		{
+			free_split(paths);
 			return (path);
+		}
 		free(path);
 		i++;
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
 	free(paths);
 	return (0);
 }

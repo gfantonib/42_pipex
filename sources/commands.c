@@ -12,10 +12,18 @@ void	get_commands_path(t_pipex *pipex, char **envp)
 {
 	pipex->path_cmd1 = get_path(pipex->cmd1[0], envp);
 	if (!pipex->path_cmd1)
-		free_cmd(pipex->cmd1);
+	{
+		free_split(pipex->cmd1);
+		error_message(6);
+
+	}
 	pipex->path_cmd2 = get_path(pipex->cmd2[0], envp);
 	if (!pipex->path_cmd2)
-		free_cmd(pipex->cmd2);
+	{
+		free_split(pipex->cmd1);
+		free_split(pipex->cmd2);
+		error_message(6);
+	}
 }
 
 void	execute_commands(t_pipex *pipex)
