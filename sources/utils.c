@@ -8,11 +8,13 @@ void	error_message(t_pipex *pipex, int flag)
 	{
 		puts("fork error");
 		free_all(pipex);
+		exit(EXIT_FAILURE);
 	}
 	else if (flag == 3)
 	{
 		puts("execve error");
 		free_all(pipex);
+		exit(EXIT_FAILURE);
 	}
 	else if (flag == 4)
 	{
@@ -23,6 +25,7 @@ void	error_message(t_pipex *pipex, int flag)
 	{
 		puts("open error");
 		free_all(pipex);
+		exit(EXIT_FAILURE);
 	}
 	else if (flag == 6)
 	{
@@ -31,10 +34,11 @@ void	error_message(t_pipex *pipex, int flag)
 			free(pipex->path_cmd1);
 		if (pipex->path_cmd2)
 			free(pipex->path_cmd2);
-		free(pipex->cmd1);
-		free(pipex->cmd2);
+		free_split(pipex->cmd1);
+		free_split(pipex->cmd2);
 		free(pipex->infile_str);
 		free(pipex->outfile_str);
+		exit(EXIT_FAILURE);
 	}
 	else if (flag == 7)
 		puts("file_name error");
@@ -90,6 +94,6 @@ char	*get_path(char *cmd, char **envp)
 		free(path);
 		i++;
 	}
-	free(paths);
+	free_split(paths);
 	return (0);
 }
