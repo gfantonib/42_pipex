@@ -12,7 +12,7 @@ void	child_process_1(t_pipex *pipex, int *fd)
 		close(fd[0]);
 		close(fd[1]);
 		if (execve(pipex->path_cmd1, pipex->cmd1, NULL) == -1)
-			error_message(pipex, 3);
+			error_message(pipex, 6);
 }
 
 void	child_process_2(t_pipex *pipex, int *fd)
@@ -27,5 +27,5 @@ void	child_process_2(t_pipex *pipex, int *fd)
 		close(fd[0]);
 		close(fd[1]);
 		if (execve(pipex->path_cmd2, pipex->cmd2, NULL) == -1)
-			error_message(pipex, 3);
+			error_message(pipex, 6);
 }

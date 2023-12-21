@@ -3,45 +3,22 @@
 void	error_message(t_pipex *pipex, int flag)
 {
 	if (flag == 1)
+	{
 		puts("argc error");
+		exit(EXIT_FAILURE);
+	}
 	else if (flag == 2)
-	{
-		puts("fork error");
-		free_all(pipex);
-		exit(EXIT_FAILURE);
-	}
-	else if (flag == 3)
-	{
-		puts("execve error");
-		free_all(pipex);
-		exit(EXIT_FAILURE);
-	}
-	else if (flag == 4)
-	{
-		puts("pipe creation error");
-		free_all(pipex);
-	}
-	else if (flag == 5)
-	{
-		puts("open error");
-		free_all(pipex);
-		exit(EXIT_FAILURE);
-	}
-	else if (flag == 6)
-	{
 		puts("command error");
-		if (pipex->path_cmd1)
-			free(pipex->path_cmd1);
-		if (pipex->path_cmd2)
-			free(pipex->path_cmd2);
-		free_split(pipex->cmd1);
-		free_split(pipex->cmd2);
-		free(pipex->infile_str);
-		free(pipex->outfile_str);
-		exit(EXIT_FAILURE);
-	}
-	else if (flag == 7)
-		puts("file_name error");
+	else if (flag == 3)
+		puts("pipe creation error");
+	else if (flag == 4)
+		puts("fork error");
+	else if (flag == 5)
+		puts("open error");
+	else if (flag == 6)
+		puts("execve error");
+	free_all(pipex);
+	exit(EXIT_FAILURE);
 }
 
 void	free_split(char **split)
@@ -59,14 +36,17 @@ void	free_split(char **split)
 
 void	free_all(t_pipex *pipex)
 {
+	if (pipex->path_cmd1)
+		free(pipex->path_cmd1);
+	if (pipex->path_cmd2)
+		free(pipex->path_cmd2);
+
 	free_split(pipex->cmd1);
 	free_split(pipex->cmd2);
 
 	free(pipex->infile_str);
 	free(pipex->outfile_str);
 
-	free(pipex->path_cmd1);
-	free(pipex->path_cmd2);
 }
 
 char	*get_path(char *cmd, char **envp)
