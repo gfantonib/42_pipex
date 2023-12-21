@@ -1,15 +1,18 @@
-NAME := pipex
+NAME = pipex
 
 LIBFT = libft/libft.a
+
 LIBFT_PATH = libft/
 
-CFLAGS	:= -Wextra -Wall -Werror -g
-HEADERS	:= -Iincludes
+CFLAGS	= -Wextra -Wall -Werror -g
+
+HEADERS	= -Iincludes
+
 MK = mkdir -p
 
 SOURCE_PATH = sources/
 
-SRCS	:= \
+SRCS	= \
 			pipex.c \
 			utils.c \
 			children.c \
@@ -17,7 +20,8 @@ SRCS	:= \
 			free.c \
 
 OBJECTS_PATH = objects
-OBJS	:= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
+
+OBJS	= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
 
 all: $(LIBFT) $(NAME)
 
