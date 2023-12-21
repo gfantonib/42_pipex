@@ -14,6 +14,7 @@ SRCS	:= \
 			utils.c \
 			children.c \
 			commands.c \
+			free.c \
 
 OBJECTS_PATH = objects
 OBJS	:= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))

@@ -6,7 +6,6 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 
-
 typedef	struct s_pipex
 {
 	char	*path_cmd1;
@@ -33,6 +32,7 @@ char	*get_path(char *cmd, char **envp);
 void	execute_commands(t_pipex *pipex);
 void	child_process_1(t_pipex *pipex, int *fd);
 void	child_process_2(t_pipex *pipex, int *fd);
+void	wait_child(t_pipex *pipex);
 void	free_all(t_pipex *pipex);
 void	success_or_error(int error_flag);
 

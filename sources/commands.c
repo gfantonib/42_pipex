@@ -37,4 +37,5 @@ void	execute_commands(t_pipex *pipex)
 
 	close(fd[0]);
 	close(fd[1]);
+	wait_child(pipex);
 }
