@@ -4,19 +4,19 @@ void	error_message(t_pipex *pipex, int flag)
 {
 	if (flag == 1)
 	{
-		puts("argc error");
+		ft_putstr_fd("argc error\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	else if (flag == 2)
-		puts("command error");
+		ft_putstr_fd("command error\n", 2);
 	else if (flag == 3)
-		puts("pipe creation error");
+		ft_putstr_fd("pipe creation error\n", 2);
 	else if (flag == 4)
-		puts("fork error");
+		ft_putstr_fd("fork error\n", 2);
 	else if (flag == 5)
-		puts("open error");
+		ft_putstr_fd("open error\n", 2);
 	else if (flag == 6)
-		puts("execve error");
+		ft_putstr_fd("execve error\n", 2);
 	free_all(pipex);
 	exit(EXIT_FAILURE);
 }
