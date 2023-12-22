@@ -14,9 +14,9 @@ int main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		error_message(&pipex, 1);
-	get_commands(&pipex, argv);
-	get_commands_path(&pipex, envp);
-	execute_commands(&pipex);
-	success_or_error(&pipex, pipex.error_flag);
+	//get_commands(&pipex, argv);
+	//get_commands_path(&pipex, envp);
+	execute_commands(argv, envp);
+	ft_putstr_fd("success", 2);
 	return (0);
 }

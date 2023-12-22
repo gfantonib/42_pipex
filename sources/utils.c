@@ -9,18 +9,18 @@ void	error_message(t_pipex *pipex, int flag)
 	}
 	else if (flag == 2)
 		ft_putstr_fd("command error\n", 2);
-	else if (flag == 3)
-		ft_putstr_fd("pipe creation error\n", 2);
-	else if (flag == 4)
-		ft_putstr_fd("fork error\n", 2);
+	// else if (flag == 3)
+	// 	ft_putstr_fd("pipe creation error\n", 2);
+	// else if (flag == 4)
+	// 	ft_putstr_fd("fork error\n", 2);
 	else if (flag == 5)
-		perror(pipex->infile_str);
+		ft_putstr_fd("fd error", 2);
 	else if (flag == 6)
 		ft_putstr_fd("execve error\n", 2);
-	else if (flag == 7)
-		ft_putstr_fd("waitpid error\n", 2);
-	else if (flag == 8)
-		ft_putstr_fd("success\n", 2);
+	// else if (flag == 7)
+	// 	ft_putstr_fd("waitpid error\n", 2);
+	// else if (flag == 8)
+	// 	ft_putstr_fd("success\n", 2);
 	free_all(pipex);
 	exit(EXIT_FAILURE);
 }

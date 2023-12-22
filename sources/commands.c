@@ -16,39 +16,67 @@ void	get_commands_path(t_pipex *pipex, char **envp)
 		error_message(pipex, 2);
 }
 
-void	wait_child(t_pipex *pipex)
-{
-	int	status;
+// void	wait_child(t_pipex *pipex)
+// {
+// 	int	status;
 	
-	pipex->error_flag = 0;
-	waitpid(pipex->pid1, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		pipex->error_flag = 1;
-	waitpid(pipex->pid2, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		pipex->error_flag = 1;
+// 	pipex->error_flag = 0;
+// 	waitpid(pipex->pid1, &status, 0);
+// 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+// 		exit(EXIT_FAILURE);
+// 	waitpid(pipex->pid2, &status, 0);
+// 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+// 		exit(EXIT_FAILURE);
+// }
+
+void	fill_pipex(t_pipex *pipex, char **argv, char **envp)
+{
+	get_commands(pipex, argv);
+	get_commands_path(pipex, envp);
 }
 
-void	execute_commands(t_pipex *pipex)
+void	execute_commands(char **argv, char **envp)
 {
+	t_pipex	pipex;
+	int	status;
+
 	int	fd[2];
 
 	if (pipe(fd) == -1)
-		error_message(pipex, 3);
+	{
+		ft_putstr_fd("pipe creation error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	pipex.pid1 = fork();
+	if (pipex.pid1 < 0)
+	{
+		ft_putstr_fd("fork error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	else if (pipex.pid1 == 0)
+	{
+		fill_pipex(&pipex, argv, envp);
+		child_process_1(&pipex, fd);
+	}
 
-	pipex->pid1 = fork();
-	if (pipex->pid1 < 0)
-		error_message(pipex, 4);
-	else if (pipex->pid1 == 0) // Child process 1
-		child_process_1(pipex, fd);
+	waitpid(pipex.pid1, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		exit(EXIT_FAILURE);
 
-	pipex->pid2 = fork();
-	if (pipex->pid2 < 0)
-		error_message(pipex, 4);
-	else if (pipex->pid2 == 0) // Child process 2
-		child_process_2(pipex, fd);
-
+	pipex.pid2 = fork();
+	if (pipex.pid2 < 0)
+	{
+		ft_putstr_fd("fork error\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	else if (pipex.pid2 == 0)
+	{
+		fill_pipex(&pipex, argv, envp);
+		child_process_2(&pipex, fd);
+	}
 	close(fd[0]);
 	close(fd[1]);
-	wait_child(pipex);
+	waitpid(pipex.pid2, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		exit(EXIT_FAILURE);
 }

@@ -29,7 +29,7 @@ void	get_commands(t_pipex *pipex, char **argv);
 void	get_commands_path(t_pipex *pipex, char **envp);
 void	free_split(char **split);
 char	*get_path(char *cmd, char **envp);
-void	execute_commands(t_pipex *pipex);
+void	execute_commands();
 void	child_process_1(t_pipex *pipex, int *fd);
 void	child_process_2(t_pipex *pipex, int *fd);
 void	wait_child(t_pipex *pipex);
