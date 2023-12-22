@@ -43,8 +43,6 @@ SOURCES = \
 	ft_substr.c \
 	ft_tolower.c \
 	ft_toupper.c \
-
-BONUS_SOURCES = \
 	ft_lstadd_back_bonus.c \
 	ft_lstadd_front_bonus.c \
 	ft_lstclear_bonus.c \
@@ -57,8 +55,6 @@ BONUS_SOURCES = \
 
 OBJECTS	:= $(addprefix $(OBJECTS_PATH)/, $(SOURCES:%.c=%.o))
 
-BONUS_OBJECTS = $(addprefix $(OBJECTS_PATH)/, $(BONUS_SOURCES:%.c=%.o))
-
 all: $(NAME)
 
 $(OBJECTS_PATH)/%.o: $(SOURCE_PATH)%.c
@@ -68,11 +64,8 @@ $(OBJECTS_PATH)/%.o: $(SOURCE_PATH)%.c
 $(NAME): $(OBJECTS)
 	ar rcs $(NAME) $?
 
-bonus: all
-	@make OBJECTS="$(BONUS_OBJECTS)" --no-print-directory
-
 clean:
-	rm -rf $(OBJECTS_PATH) $(BONUS_OBJECTS_PATH)
+	rm -rf $(OBJECTS_PATH)
 
 fclean: clean
 	rm -f $(NAME)
