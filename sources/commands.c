@@ -16,6 +16,19 @@ void	get_commands_path(t_pipex *pipex, char **envp)
 		error_message(pipex, 2);
 }
 
+void	wait_child(t_pipex *pipex)
+{
+	int	status;
+	
+	pipex->error_flag = 0;
+	waitpid(pipex->pid1, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		pipex->error_flag = 1;
+	waitpid(pipex->pid2, &status, 0);
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		pipex->error_flag = 1;
+}
+
 void	execute_commands(t_pipex *pipex)
 {
 	int	fd[2];
