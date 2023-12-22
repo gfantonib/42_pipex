@@ -19,7 +19,7 @@ void	child_process_2(t_pipex *pipex, int *fd)
 {
 		int		fdout;
 
-		fdout = open(pipex->outfile_str, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		fdout = open(pipex->outfile_str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fdout == -1)
 			error_message(pipex, 5);
 		dup2(fd[0], STDIN_FILENO);

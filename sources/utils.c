@@ -14,7 +14,7 @@ void	error_message(t_pipex *pipex, int flag)
 	else if (flag == 4)
 		ft_putstr_fd("fork error\n", 2);
 	else if (flag == 5)
-		ft_putstr_fd("open error\n", 2);
+		perror(pipex->infile_str);
 	else if (flag == 6)
 		ft_putstr_fd("execve error\n", 2);
 	else if (flag == 7)
