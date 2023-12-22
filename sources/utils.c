@@ -17,6 +17,10 @@ void	error_message(t_pipex *pipex, int flag)
 		ft_putstr_fd("open error\n", 2);
 	else if (flag == 6)
 		ft_putstr_fd("execve error\n", 2);
+	else if (flag == 7)
+		ft_putstr_fd("execve/waitpid error\n", 2);
+	else if (flag == 8)
+		ft_putstr_fd("success\n", 2);
 	free_all(pipex);
 	exit(EXIT_FAILURE);
 }

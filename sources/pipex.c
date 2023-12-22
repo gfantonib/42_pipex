@@ -1,11 +1,11 @@
 #include "../includes/pipex.h"
 
-void	success_or_error(int error_flag)
+void	success_or_error(t_pipex *pipex, int error_flag)
 {
 	if (error_flag == 1)
-		exit(EXIT_FAILURE);
+		error_message(pipex, 7);
 	else if (error_flag == 0)
-		puts("success!");
+		error_message(pipex, 8);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -17,7 +17,6 @@ int main(int argc, char **argv, char **envp)
 	get_commands(&pipex, argv);
 	get_commands_path(&pipex, envp);
 	execute_commands(&pipex);
-	free_all(&pipex);
-	success_or_error(pipex.error_flag);
+	success_or_error(&pipex, pipex.error_flag);
 	return (0);
 }
