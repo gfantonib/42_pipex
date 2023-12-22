@@ -18,7 +18,7 @@ void	error_message(t_pipex *pipex, int flag)
 	else if (flag == 6)
 		ft_putstr_fd("execve error\n", 2);
 	else if (flag == 7)
-		ft_putstr_fd("execve/waitpid error\n", 2);
+		ft_putstr_fd("waitpid error\n", 2);
 	else if (flag == 8)
 		ft_putstr_fd("success\n", 2);
 	free_all(pipex);
@@ -52,17 +52,4 @@ char	*get_path(char *cmd, char **envp)
 	}
 	free_split(paths);
 	return (0);
-}
-
-void	wait_child(t_pipex *pipex)
-{
-	int	status;
-	
-	pipex->error_flag = 0;
-	waitpid(pipex->pid1, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		pipex->error_flag = 1;
-	waitpid(pipex->pid2, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		pipex->error_flag = 1;
 }
