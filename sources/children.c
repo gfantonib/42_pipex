@@ -37,7 +37,6 @@ void	child_process_2(char **argv, char **envp, int *fd)
 void	call_to_children(char **argv, char **envp)
 {
 	int pid;
-	int	status;
 	int	fd[2];
 
 	if (pipe(fd) == -1)
@@ -47,9 +46,7 @@ void	call_to_children(char **argv, char **envp)
 		error_message(4);
 	else if (pid == 0)
 		child_process_1(argv, envp, fd);
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		exit(7);
+	waitpid(pid, NULL, 0);
 	pid = fork();
 	if (pid < 0)
 		error_message(4);
@@ -57,7 +54,5 @@ void	call_to_children(char **argv, char **envp)
 		child_process_2(argv, envp, fd);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid, &status, 0);
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		exit(7);
+	waitpid(pid, NULL, 0);
 }
