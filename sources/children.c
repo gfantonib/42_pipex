@@ -49,7 +49,7 @@ void	call_to_children(char **argv, char **envp)
 		child_process_1(argv, envp, fd);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		error_message(7);
+		exit(7);
 	pid = fork();
 	if (pid < 0)
 		error_message(4);
@@ -59,5 +59,5 @@ void	call_to_children(char **argv, char **envp)
 	close(fd[1]);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		error_message(7);
+		exit(7);
 }

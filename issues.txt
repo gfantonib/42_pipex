@@ -1,6 +1,6 @@
 1.	Double error massege: every error occured inside a child process gets its specific
 	error masssege plus the general error massege after a waitpid with error sign.
-	ex: ./pipex input.txt "sort -r" "cat" output.txt
+	ex: ./pipex file1 "grep patternN" "wc -w" file2
 
 2.	Simple quotation dont work: separate string not only by SPACE but by ' to.
 	ex: ./pipex input2.txt "grep 'pattern'" "wc -w" output.txt
