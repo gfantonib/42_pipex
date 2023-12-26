@@ -14,10 +14,10 @@ SOURCE_PATH = sources/
 
 SRCS	= \
 			pipex.c \
-			utils.c \
 			children.c \
 			commands.c \
 			free.c \
+			error.c \
 
 OBJECTS_PATH = objects
 

@@ -17,24 +17,23 @@ typedef	struct s_pipex
 	char	*infile_str;
 	char	*outfile_str;
 
-	int		pid1;
-	int		pid2;
+	int		fdin;
+	int		fdout;
 
 	int		error_flag;
 
 }		t_pipex;
 
-void	error_message(t_pipex *pipex, int flag);
+void	call_to_children(char **argv, char **envp);
 void	get_commands(t_pipex *pipex, char **argv);
 void	get_commands_path(t_pipex *pipex, char **envp);
-void	free_split(char **split);
 char	*get_path(char *cmd, char **envp);
-void	execute_commands();
-void	child_process_1(t_pipex *pipex, int *fd);
-void	child_process_2(t_pipex *pipex, int *fd);
-void	wait_child(t_pipex *pipex);
+void	child_process_1(char **argv, char **envp, int *fd);
+void	child_process_2(char **argv, char **envp, int *fd);
+void	error_message(int flag);
+void	error_message_free(t_pipex *pipex, int flag);
 void	free_all(t_pipex *pipex);
-void	success_or_error(t_pipex *pipex, int error_flag);
+void	free_split(char **split);
 
 
 
