@@ -1,5 +1,7 @@
 NAME = pipex
 
+BONUS_NAME = bonus_pipex
+
 LIBFT = libft/libft.a
 
 LIBFT_PATH = libft/
@@ -12,6 +14,8 @@ MK = mkdir -p
 
 SOURCE_PATH = sources/
 
+BONUS_SOURCE_PATH = bonus_sources/
+
 SRCS	= \
 			pipex.c \
 			children.c \
@@ -19,9 +23,20 @@ SRCS	= \
 			free.c \
 			error.c \
 
+BONUS_SRCS	= \
+			bonus_pipex.c \
+			bonus_children.c \
+			bonus_commands.c \
+			bonus_free.c \
+			bonus_error.c \
+
 OBJECTS_PATH = objects
 
+BONUS_OBJECTS_PATH = bonus_objects
+
 OBJS	= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
+
+BONUS_OBJS	= $(addprefix $(BONUS_OBJECTS_PATH)/, $(BONUS_SRCS:%.c=%.o))
 
 all: $(LIBFT) $(NAME)
 
@@ -32,17 +47,26 @@ $(OBJECTS_PATH)/%.o: $(SOURCE_PATH)%.c
 	$(MK) $(@D)
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
+$(BONUS_OBJECTS_PATH)/%.o: $(BONUS_SOURCE_PATH)%.c
+	$(MK) $(@D)
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
+
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LIBFT) $(HEADERS) -o $(NAME)
 
+$(BONUS_NAME): $(BONUS_OBJS)
+	$(CC) $(BONUS_OBJS) $(LIBFT) $(HEADERS) -o $(BONUS_NAME)
+
 clean:
-	rm -rf $(OBJS)
-	rm -rf $(OBJECTS_PATH)
+#rm -rf $(OBJS) $(BONUS_OBJS)
+	rm -rf $(OBJECTS_PATH) $(BONUS_OBJECTS_PATH)
 	make clean -C $(LIBFT_PATH)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -C $(LIBFT_PATH)
+
+bonus: $(LIBFT) $(BONUS_NAME)
 
 re: fclean all
 
