@@ -25,6 +25,8 @@ SRCS	= \
 
 BONUS_SRCS	= \
 			bonus_pipex.c \
+			bonus_commands.c \
+			bonus_free.c \
 			bonus_error.c \
 
 OBJECTS_PATH = objects

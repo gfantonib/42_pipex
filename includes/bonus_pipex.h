@@ -9,6 +9,7 @@
 typedef struct s_cmd
 {
 	char 	**cmd;
+	char 	*cmd_path;
 	char	**argv;
 	char	**envp;
 
@@ -26,7 +27,10 @@ typedef	struct s_pipex
 
 }		t_pipex;
 
+void	get_cmds(t_pipex *pipex, char **argv, char **envp);
+char	*get_path(char *cmd, char **envp);
 void	error_message(int flag);
+void	free_split(char **split);
 
 
 

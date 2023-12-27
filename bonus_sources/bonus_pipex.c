@@ -1,26 +1,5 @@
 #include "../includes/bonus_pipex.h"
 
-void	get_cmds(t_pipex *pipex, char **argv, char **envp)
-{
-	int	i;
-	int	cmd_index;
-
-	envp = NULL;
-
-	pipex->cmds_array = (t_cmd *)malloc(sizeof(t_cmd) * pipex->nbr_of_cmds);
-	if (!pipex->cmds_array)
-		error_message(2);
-
-	i = 0;
-	cmd_index = pipex->cmd_index;
-	while (i < pipex->nbr_of_cmds)
-	{
-		pipex->cmds_array[i].cmd = ft_split(argv[cmd_index], ' ');
-		cmd_index++;
-		i++;
-	}
-}
-
 void	initial_values(t_pipex *pipex, int argc)
 {
 	pipex->nbr_of_cmds = argc - 3;
@@ -38,9 +17,10 @@ void	tester(t_pipex *pipex)
 		j = 0;
 		while (pipex->cmds_array[i].cmd[j])
 		{
-			printf("%s ", pipex->cmds_array[i].cmd[j]);
+			printf("cmd: %s\n", pipex->cmds_array[i].cmd[j]);
 			j++;
 		}
+		printf("path: %s\n", pipex->cmds_array[i].cmd_path);
 		printf("\n");
 		i++;
 	}
