@@ -6,3 +6,10 @@
 	ex: ./pipex input2.txt "grep 'pattern'" "wc -w" output.txt
 
 3. Make error_massage output like the shell.
+
+$> cat -e <<EOF | grep line
+Text to be passed to command1
+line 2 of the input
+EOF
+
+$> ./pipex here_doc LIMITER cmd cmd1 file
