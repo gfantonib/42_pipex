@@ -1,18 +1,21 @@
 #include "../includes/bonus_pipex.h"
 
-// void	free_all(t_pipex *pipex)
-// {
-// 	if (pipex->path_cmd1)
-// 		free(pipex->path_cmd1);
-// 	if (pipex->path_cmd2)
-// 		free(pipex->path_cmd2);
+void	free_all(t_pipex *pipex, int i)
+{
+	while (i < pipex->nbr_of_cmds)
+	{
+		free_cmd_array(pipex->cmds_array[i]);
+		i++;
+	}
+	exit(EXIT_FAILURE);
+}
 
-// 	free_split(pipex->cmd1);
-// 	free_split(pipex->cmd2);
-
-// 	free(pipex->infile_str);
-// 	free(pipex->outfile_str);
-// }
+void	free_cmd_array(t_cmd cmd_array)
+{
+	free(cmd_array.cmd_path);
+	free_split(cmd_array.cmd);
+	//free(&cmd_array);
+}
 
 void	free_split(char **split)
 {

@@ -8,5 +8,9 @@ void	error_message(int flag)
 		ft_putstr_fd("cannot initialize commands\n", 2);
 	else if (flag == 3)
 		ft_putstr_fd("cannot open file\n", 2);
+	else if (flag == 4)
+		ft_putstr_fd("cannot initialize pipe\n", 2);
+	else if (flag == 5)
+		ft_putstr_fd("cannot initialize fork\n", 2);
 	exit(EXIT_FAILURE);
 }

@@ -52,6 +52,14 @@ void	get_cmds(t_pipex *pipex, char **argv, char **envp)
 	{
 		pipex->cmds_array[i].cmd = ft_split(argv[cmd_index], ' ');
 		pipex->cmds_array[i].cmd_path = get_path(pipex->cmds_array[i].cmd[0], envp);
+		pipex->cmds_array[i].pid = -1;
+		if (i == 0)
+			pipex->cmds_array[i].cmd_position = 'I';
+		else if (i < (pipex->nbr_of_cmds - 1))
+			pipex->cmds_array[i].cmd_position = 'M';
+		else
+			pipex->cmds_array[i].cmd_position = 'F';
+
 		cmd_index++;
 		i++;
 	}

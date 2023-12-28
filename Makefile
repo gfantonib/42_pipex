@@ -27,6 +27,7 @@ BONUS_SRCS	= \
 			bonus_pipex.c \
 			bonus_commands.c \
 			bonus_files.c \
+			bonus_exec.c \
 			bonus_free.c \
 			bonus_error.c \
 
