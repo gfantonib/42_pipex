@@ -7,6 +7,7 @@ void	free_all(t_pipex *pipex, int i)
 		free_cmd_array(pipex->cmds_array[i]);
 		i++;
 	}
+	free(pipex->cmds_array);
 	exit(EXIT_FAILURE);
 }
 
@@ -14,7 +15,6 @@ void	free_cmd_array(t_cmd cmd_array)
 {
 	free(cmd_array.cmd_path);
 	free_split(cmd_array.cmd);
-	//free(&cmd_array);
 }
 
 void	free_split(char **split)

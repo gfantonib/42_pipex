@@ -23,6 +23,7 @@ void	exec_cmds(t_pipex *pipex)
 		free_cmd_array(pipex->cmds_array[i]);
 		i++;
 	}
+	free_all(pipex, i);
 	close(STDIN_FILENO);
 }
 
