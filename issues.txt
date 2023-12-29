@@ -16,4 +16,5 @@
 5. list of tests
 ./bonus_pipex file1 "cat -e" "grep Melvin" file2
 ./bonus_pipex file1 "ls -l" "grep file" "wc -l" file2
+./bonus_pipex file1  "cat" "tr , \n" "sort" "uniq" file2
 

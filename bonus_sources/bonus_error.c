@@ -19,5 +19,14 @@ void	error_message_free(t_pipex *pipex, int flag)
 {
 	if (flag == 6)
 		ft_putstr_fd("cannot get command path\n", 2);
+	close_all(pipex);
 	free_all(pipex, 0);
+}
+
+void	close_all(t_pipex *pipex)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(pipex->fd_in);
+	close(pipex->fd_out);
 }

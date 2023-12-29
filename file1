@@ -1,9 +1,1 @@
-drwxr-xr-x 2 gfantoni candidate 4096 Dec 28 14:51 bonus_sources/
--rw-r--r-- 1 gfantoni candidate   88 Dec 28 17:33 file1
--rw-r--r-- 1 gfantoni candidate   27 Dec 29 11:20 file2
-drwxr-xr-x 2 gfantoni candidate 4096 Dec 26 12:44 includes/
--rw-r--r-- 1 gfantoni candidate  526 Dec 26 15:40 issues.txt
-drwxr-xr-x 3 gfantoni candidate 4096 Dec 29 11:20 libft/
--rw-r--r-- 1 gfantoni candidate 1286 Dec 28 15:28 Makefile
--rw-r--r-- 1 gfantoni candidate  790 Dec 13 13:43 README.md
-drwxr-xr-x 2 gfantoni candidate 4096 Dec 26 12:16 sources/
+cherry,apple,banana,banana

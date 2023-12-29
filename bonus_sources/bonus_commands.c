@@ -45,7 +45,7 @@ static void	printf_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		printf("%s", split[i]);
+		printf("%s ", split[i]);
 		i++;
 	}
 	printf("\n");
