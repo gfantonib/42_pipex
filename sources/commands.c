@@ -1,12 +1,12 @@
 #include "../includes/pipex.h"
 
-void	get_commands(t_pipex *pipex, char **argv)
-{
-	pipex->cmd1 = ft_split(argv[2], ' ');
-	pipex->cmd2 = ft_split(argv[3], ' ');
-	pipex->infile_str = ft_strdup(argv[1]);
-	pipex->outfile_str = ft_strdup(argv[4]);
-}
+// void	get_commands(t_pipex *pipex, char **argv)
+// {
+// 	pipex->cmd1 = ft_split(argv[2], ' ');
+// 	pipex->cmd2 = ft_split(argv[3], ' ');
+// 	pipex->infile_str = ft_strdup(argv[1]);
+// 	pipex->outfile_str = ft_strdup(argv[4]);
+// }
 
 char	*get_path(char *cmd, char **envp)
 {
@@ -37,10 +37,57 @@ char	*get_path(char *cmd, char **envp)
 	return (0);
 }
 
-void	get_commands_path(t_pipex *pipex, char **envp)
+static void	printf_split(char **split)
 {
-	pipex->path_cmd1 = get_path(pipex->cmd1[0], envp);
-	pipex->path_cmd2 = get_path(pipex->cmd2[0], envp);
-	if (!pipex->path_cmd1 || !pipex->path_cmd2)
-		error_message_free(pipex, 2);
+	int i;
+
+	printf("cmd: ");
+	i = 0;
+	while (split[i])
+	{
+		printf("%s ", split[i]);
+		i++;
+	}
+	printf("\n");
 }
+
+void	get_cmds(t_pipex *pipex, char **argv, char **envp)
+{
+	int	i;
+	int	cmd_index;
+
+	pipex->cmds_array = (t_cmd *)malloc(sizeof(t_cmd) * pipex->nbr_of_cmds);
+	if (!pipex->cmds_array)
+		error_message(2);
+	set_to_null(pipex);
+
+	i = 0;
+	cmd_index = pipex->cmd_index;
+	while (i < pipex->nbr_of_cmds)
+	{
+		pipex->cmds_array[i].cmd = ft_split(argv[cmd_index], ' ');
+		printf_split(pipex->cmds_array[i].cmd); // REMOVE BEFORE GRADE
+		pipex->cmds_array[i].cmd_path = get_path(pipex->cmds_array[i].cmd[0], envp);
+		if (!pipex->cmds_array[i].cmd_path)
+			error_message_free(pipex, 6);
+		printf("path: %s\n", pipex->cmds_array[i].cmd_path); // REMOVE BEFORE GRADE
+		pipex->cmds_array[i].pid = -1;
+		if (i == 0)
+			pipex->cmds_array[i].cmd_position = 'I';
+		else if (i < (pipex->nbr_of_cmds - 1))
+			pipex->cmds_array[i].cmd_position = 'M';
+		else
+			pipex->cmds_array[i].cmd_position = 'F';
+
+		cmd_index++;
+		i++;
+	}
+}
+
+// void	get_commands_path(t_pipex *pipex, char **envp)
+// {
+// 	pipex->path_cmd1 = get_path(pipex->cmd1[0], envp);
+// 	pipex->path_cmd2 = get_path(pipex->cmd2[0], envp);
+// 	if (!pipex->path_cmd1 || !pipex->path_cmd2)
+// 		error_message_free(pipex, 2);
+// }

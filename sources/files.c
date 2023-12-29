@@ -1,4 +1,4 @@
-#include "../includes/bonus_pipex.h"
+#include "../includes/pipex.h"
 
 void	get_fd_output(t_pipex *pipex)
 {

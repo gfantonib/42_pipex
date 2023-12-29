@@ -18,18 +18,13 @@ BONUS_SOURCE_PATH = bonus_sources/
 
 SRCS	= \
 			pipex.c \
-			children.c \
 			commands.c \
+			files.c \
+			exec.c \
 			free.c \
 			error.c \
 
 BONUS_SRCS	= \
-			bonus_pipex.c \
-			bonus_commands.c \
-			bonus_files.c \
-			bonus_exec.c \
-			bonus_free.c \
-			bonus_error.c \
 
 OBJECTS_PATH = objects
 
@@ -59,7 +54,6 @@ $(BONUS_NAME): $(BONUS_OBJS)
 	$(CC) $(BONUS_OBJS) $(LIBFT) $(HEADERS) -o $(BONUS_NAME)
 
 clean:
-#rm -rf $(OBJS) $(BONUS_OBJS)
 	rm -rf $(OBJECTS_PATH) $(BONUS_OBJECTS_PATH)
 	make clean -C $(LIBFT_PATH)
 
@@ -67,7 +61,7 @@ fclean: clean
 	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -C $(LIBFT_PATH)
 
-bonus: $(LIBFT) $(BONUS_NAME)
+#bonus: $(LIBFT) $(BONUS_NAME)
 
 re: fclean all
 

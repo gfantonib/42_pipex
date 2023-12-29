@@ -6,34 +6,60 @@
 #include <fcntl.h>
 #include "../libft/libft.h"
 
+typedef struct s_cmd
+{
+	char 	**cmd;
+	char 	*cmd_path;
+
+	int		pid;
+
+	char	cmd_position;
+
+	// char	**argv;
+	// char	**envp;
+
+}		t_cmd;
+
 typedef	struct s_pipex
 {
-	char	*path_cmd1;
-	char	**cmd1;
+	int	fd_in;
+	int	fd_out;
 
-	char	*path_cmd2;
-	char	**cmd2;
+	int	fd_pipe[2];
 
-	char	*infile_str;
-	char	*outfile_str;
+	int nbr_of_cmds;
+	int	cmd_index;
 
-	int		fdin;
-	int		fdout;
+	char *input_file;
+	char *output_file;
 
-	int		error_flag;
+	t_cmd	*cmds_array;
 
 }		t_pipex;
 
-void	call_to_children(char **argv, char **envp);
-void	get_commands(t_pipex *pipex, char **argv);
-void	get_commands_path(t_pipex *pipex, char **envp);
+void	get_cmds(t_pipex *pipex, char **argv, char **envp);
 char	*get_path(char *cmd, char **envp);
-void	child_process_1(char **argv, char **envp, int *fd);
-void	child_process_2(char **argv, char **envp, int *fd);
+
 void	error_message(int flag);
 void	error_message_free(t_pipex *pipex, int flag);
-void	free_all(t_pipex *pipex);
+void	close_all(t_pipex *pipex);
+
+void	get_fd_file(t_pipex *pipex, char **argv);
+void	get_file_name(t_pipex *pipex, char **argv);
+void	get_fd_input(t_pipex *pipex);
+void	get_fd_output(t_pipex *pipex);
+
+void	exec_cmds(t_pipex *pipex);
+void	exec_child(t_pipex *pipex, int i);
+void	exec_initial(t_pipex *pipex, int i);
+void	exec_mediate(t_pipex *pipex, int i);
+void	exec_final(t_pipex *pipex, int i);
+
+void	free_all(t_pipex *pipex, int i);
+void	free_cmd_array(t_cmd cmd_array);
 void	free_split(char **split);
+void	set_to_null(t_pipex *pipex);
+
 
 
 

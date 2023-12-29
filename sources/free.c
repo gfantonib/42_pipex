@@ -1,17 +1,22 @@
 #include "../includes/pipex.h"
 
-void	free_all(t_pipex *pipex)
+void	free_all(t_pipex *pipex, int i)
 {
-	if (pipex->path_cmd1)
-		free(pipex->path_cmd1);
-	if (pipex->path_cmd2)
-		free(pipex->path_cmd2);
+	while (i < pipex->nbr_of_cmds)
+	{
+		free_cmd_array(pipex->cmds_array[i]);
+		i++;
+	}
+	free(pipex->cmds_array);
+	exit(EXIT_FAILURE);
+}
 
-	free_split(pipex->cmd1);
-	free_split(pipex->cmd2);
-
-	free(pipex->infile_str);
-	free(pipex->outfile_str);
+void	free_cmd_array(t_cmd cmd_array)
+{
+	if (cmd_array.cmd_path)
+		free(cmd_array.cmd_path);
+	if (cmd_array.cmd)
+		free_split(cmd_array.cmd);
 }
 
 void	free_split(char **split)
@@ -25,4 +30,17 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	set_to_null(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipex->nbr_of_cmds)
+	{
+		pipex->cmds_array[i].cmd = NULL;
+		pipex->cmds_array[i].cmd_path = NULL;
+		i++;
+	}
 }

@@ -1,4 +1,4 @@
-#include "../includes/bonus_pipex.h"
+#include "../includes/pipex.h"
 
 void	exec_cmds(t_pipex *pipex)
 {
