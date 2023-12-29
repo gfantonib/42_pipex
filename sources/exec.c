@@ -23,8 +23,8 @@ void	exec_cmds(t_pipex *pipex)
 		free_cmd_array(pipex->cmds_array[i]);
 		i++;
 	}
-	free_all(pipex, i);
 	close(STDIN_FILENO);
+	free_all(pipex, i);
 }
 
 void	exec_child(t_pipex *pipex, int i)
@@ -44,7 +44,10 @@ void	exec_initial(t_pipex *pipex, int i)
 	dup2(pipex->fd_pipe[1], STDOUT_FILENO);
 	close(pipex->fd_pipe[1]);
 	if (execve(pipex->cmds_array[i].cmd_path, pipex->cmds_array[i].cmd, NULL) < 0)
+	{
+		close_all(pipex);
 		free_all(pipex, i);
+	}
 }
 
 void	exec_mediate(t_pipex *pipex, int i)
@@ -53,7 +56,10 @@ void	exec_mediate(t_pipex *pipex, int i)
 	dup2(pipex->fd_pipe[1], STDOUT_FILENO);
 	close(pipex->fd_pipe[1]);
 	if (execve(pipex->cmds_array[i].cmd_path, pipex->cmds_array[i].cmd, NULL) < 0)
+	{
+		close_all(pipex);
 		free_all(pipex, i);
+	}
 }
 
 void	exec_final(t_pipex *pipex, int i)
@@ -62,5 +68,8 @@ void	exec_final(t_pipex *pipex, int i)
 	close(pipex->fd_pipe[1]);
 	close(pipex->fd_pipe[0]);
 	if (execve(pipex->cmds_array[i].cmd_path, pipex->cmds_array[i].cmd, NULL) < 0)
+	{
+		close_all(pipex);
 		free_all(pipex, i);
+	}
 }

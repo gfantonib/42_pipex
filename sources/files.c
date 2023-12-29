@@ -1,17 +1,9 @@
 #include "../includes/pipex.h"
-
-void	get_fd_output(t_pipex *pipex)
+void	get_fd_file(t_pipex *pipex, char **argv)
 {
-	pipex->fd_out = open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (pipex->fd_out < 0)
-		error_message(3);
-}
-
-void	get_fd_input(t_pipex *pipex)
-{
-	pipex->fd_in = open(pipex->input_file, O_RDONLY);
-	if (pipex->fd_in < 0)
-		error_message(3);
+	get_file_name(pipex, argv);
+	get_fd_input(pipex);
+	get_fd_output(pipex);
 }
 
 void	get_file_name(t_pipex *pipex, char **argv)
@@ -20,9 +12,20 @@ void	get_file_name(t_pipex *pipex, char **argv)
 	pipex->output_file = argv[pipex->nbr_of_cmds + 2];
 }
 
-void	get_fd_file(t_pipex *pipex, char **argv)
+void	get_fd_input(t_pipex *pipex)
 {
-	get_file_name(pipex, argv);
-	get_fd_input(pipex);
-	get_fd_output(pipex);
+	if (access(pipex->input_file, F_OK) != 0)
+			error_message_file(1);
+	else if (access(pipex->input_file, R_OK) != 0)
+			error_message_file(2);
+	pipex->fd_in = open(pipex->input_file, O_RDONLY);
+	if (pipex->fd_in < 0)
+		error_message_file(3);
+}
+
+void	get_fd_output(t_pipex *pipex)
+{
+	pipex->fd_out = open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (pipex->fd_out < 0)
+		error_message(3);
 }

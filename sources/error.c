@@ -15,6 +15,17 @@ void	error_message(int flag)
 	exit(EXIT_FAILURE);
 }
 
+void	error_message_file(int flag)
+{
+	if (flag == 1)
+		perror("Error, file not found");
+	if (flag == 2)
+		perror("Error, cannot read file");
+	if (flag == 3)
+		perror("Error, cannot open file");
+	exit(flag);
+}
+
 void	error_message_free(t_pipex *pipex, int flag)
 {
 	if (flag == 6)

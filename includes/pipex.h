@@ -42,6 +42,7 @@ char	*get_path(char *cmd, char **envp);
 
 void	error_message(int flag);
 void	error_message_free(t_pipex *pipex, int flag);
+void	error_message_file(int flag);
 void	close_all(t_pipex *pipex);
 
 void	get_fd_file(t_pipex *pipex, char **argv);
