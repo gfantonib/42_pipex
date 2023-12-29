@@ -13,8 +13,10 @@ void	free_all(t_pipex *pipex, int i)
 
 void	free_cmd_array(t_cmd cmd_array)
 {
-	free(cmd_array.cmd_path);
-	free_split(cmd_array.cmd);
+	if (cmd_array.cmd_path)
+		free(cmd_array.cmd_path);
+	if (cmd_array.cmd)
+		free_split(cmd_array.cmd);
 }
 
 void	free_split(char **split)
@@ -28,4 +30,17 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	set_to_null(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipex->nbr_of_cmds)
+	{
+		pipex->cmds_array[i].cmd = NULL;
+		pipex->cmds_array[i].cmd_path = NULL;
+		i++;
+	}
 }

@@ -41,6 +41,7 @@ void	get_cmds(t_pipex *pipex, char **argv, char **envp);
 char	*get_path(char *cmd, char **envp);
 
 void	error_message(int flag);
+void	error_message_free(t_pipex *pipex, int flag);
 
 void	get_fd_file(t_pipex *pipex, char **argv);
 void	get_file_name(t_pipex *pipex, char **argv);
@@ -56,6 +57,7 @@ void	exec_final(t_pipex *pipex, int i);
 void	free_all(t_pipex *pipex, int i);
 void	free_cmd_array(t_cmd cmd_array);
 void	free_split(char **split);
+void	set_to_null(t_pipex *pipex);
 
 
 

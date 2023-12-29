@@ -37,8 +37,8 @@ int main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		error_message(1);
 	initial_values(&pipex, argc);
-	get_cmds(&pipex, argv, envp);
 	get_fd_file(&pipex, argv);
+	get_cmds(&pipex, argv, envp);
 	exec_cmds(&pipex);
 
 	//tester(&pipex);

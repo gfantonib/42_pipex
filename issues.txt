@@ -7,9 +7,13 @@
 
 3. Make error_massage output like the shell.
 
-$> cat -e <<EOF | grep line
-Text to be passed to command1
-line 2 of the input
-EOF
+4. How to use here_doc
+	$> cat -e <<EOF | grep line
+	Text to be passed to command1
+	line 2 of the input
+	EOF
 
-$> ./pipex here_doc LIMITER cmd cmd1 file
+5. list of tests
+./bonus_pipex file1 "cat -e" "grep Melvin" file2
+./bonus_pipex file1 "ls -l" "grep file" "wc -l" file2
+
