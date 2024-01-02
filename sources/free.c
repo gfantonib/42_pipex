@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/02 11:49:25 by gfantoni          #+#    #+#             */
+/*   Updated: 2024/01/02 11:49:46 by gfantoni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 void	free_all(t_pipex *pipex, int i)
 {
 	while (i < pipex->nbr_of_cmds)
 	{
-		free_cmd_array(pipex->cmds_array[i]);
+		free_cmd_array(pipex->cmds_str[i]);
 		i++;
 	}
-	free(pipex->cmds_array);
+	free(pipex->cmds_str);
 	exit(EXIT_FAILURE);
 }
 
@@ -24,23 +36,10 @@ void	free_split(char **split)
 	int	i;
 
 	i = 0;
-	while(split[i])
+	while (split[i])
 	{
 		free(split[i]);
 		i++;
 	}
 	free(split);
-}
-
-void	set_to_null(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (i < pipex->nbr_of_cmds)
-	{
-		pipex->cmds_array[i].cmd = NULL;
-		pipex->cmds_array[i].cmd_path = NULL;
-		i++;
-	}
 }

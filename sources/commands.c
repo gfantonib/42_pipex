@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   commands.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/02 11:42:09 by gfantoni          #+#    #+#             */
+/*   Updated: 2024/01/02 11:48:27 by gfantoni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
-static void	printf_split(char **split) // REMOVE BEFORE GRADE
+static void	set_to_null(t_pipex *pipex)
 {
-	int i;
+	int	i;
 
-	printf("cmd: ");
 	i = 0;
-	while (split[i])
+	while (i < pipex->nbr_of_cmds)
 	{
-		printf("%s ", split[i]);
+		pipex->cmds_str[i].cmd = NULL;
+		pipex->cmds_str[i].cmd_path = NULL;
 		i++;
 	}
-	printf("\n");
 }
 
 void	get_cmds(t_pipex *pipex, char **argv, char **envp)
@@ -19,29 +30,25 @@ void	get_cmds(t_pipex *pipex, char **argv, char **envp)
 	int	i;
 	int	cmd_index;
 
-	pipex->cmds_array = (t_cmd *)malloc(sizeof(t_cmd) * pipex->nbr_of_cmds);
-	if (!pipex->cmds_array)
+	pipex->cmds_str = (t_cmd *)malloc(sizeof(t_cmd) * pipex->nbr_of_cmds);
+	if (!pipex->cmds_str)
 		error_message(2);
 	set_to_null(pipex);
-
 	i = 0;
 	cmd_index = pipex->cmd_index;
 	while (i < pipex->nbr_of_cmds)
 	{
-		pipex->cmds_array[i].cmd = ft_split(argv[cmd_index], ' ');
-		printf_split(pipex->cmds_array[i].cmd); // REMOVE BEFORE GRADE
-		pipex->cmds_array[i].cmd_path = get_path(pipex->cmds_array[i].cmd[0], envp);
-		if (!pipex->cmds_array[i].cmd_path)
+		pipex->cmds_str[i].cmd = ft_split(argv[cmd_index], ' ');
+		pipex->cmds_str[i].cmd_path = get_path(pipex->cmds_str[i].cmd[0], envp);
+		if (!pipex->cmds_str[i].cmd_path)
 			error_message_free(pipex, 6);
-		printf("path: %s\n", pipex->cmds_array[i].cmd_path); // REMOVE BEFORE GRADE
-		pipex->cmds_array[i].pid = -1;
+		pipex->cmds_str[i].pid = -1;
 		if (i == 0)
-			pipex->cmds_array[i].cmd_position = 'I';
+			pipex->cmds_str[i].cmd_position = 'I';
 		else if (i < (pipex->nbr_of_cmds - 1))
-			pipex->cmds_array[i].cmd_position = 'M';
+			pipex->cmds_str[i].cmd_position = 'M';
 		else
-			pipex->cmds_array[i].cmd_position = 'F';
-
+			pipex->cmds_str[i].cmd_position = 'F';
 		cmd_index++;
 		i++;
 	}
@@ -75,5 +82,3 @@ char	*get_path(char *cmd, char **envp)
 	free_split(paths);
 	return (0);
 }
-
-
