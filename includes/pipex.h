@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:35:18 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 11:48:01 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:02:37 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ void	exec_final(t_pipex *pipex, int i);
 void	free_all(t_pipex *pipex, int i);
 void	free_cmd_array(t_cmd cmds_str);
 void	free_split(char **split);
-void	set_to_null(t_pipex *pipex);
 
 #endif
