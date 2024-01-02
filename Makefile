@@ -14,7 +14,7 @@ MK = mkdir -p
 
 SOURCE_PATH = sources/
 
-BONUS_SOURCE_PATH = bonus_sources/
+BONUS_SOURCE_PATH = sources_bonus/
 
 SRCS	= \
 			pipex.c \
@@ -25,6 +25,12 @@ SRCS	= \
 			error.c \
 
 BONUS_SRCS	= \
+			pipex_bonus.c \
+			commands_bonus.c \
+			files_bonus.c \
+			exec_bonus.c \
+			free_bonus.c \
+			error_bonus.c \
 
 OBJECTS_PATH = objects
 
@@ -61,7 +67,7 @@ fclean: clean
 	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -C $(LIBFT_PATH)
 
-#bonus: $(LIBFT) $(BONUS_NAME)
+bonus: $(LIBFT) $(BONUS_NAME)
 
 re: fclean all
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 12:13:29 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:11:19 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	initial_values(t_pipex *pipex, int argc)
 {
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
-	if (argc != 5)
+	if (argc < 5)
 		error_message(1);
 	initial_values(&pipex, argc);
 	get_fd_file(&pipex, argv);
