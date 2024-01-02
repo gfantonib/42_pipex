@@ -6,13 +6,13 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 12:10:16 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:37:01 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void	error_message(int flag)
+void	error_message(t_pipex *pipex, int flag)
 {
 	if (flag == 1)
 		ft_putstr_fd("invalid parameter usage\n", 2);
@@ -24,10 +24,10 @@ void	error_message(int flag)
 		ft_putstr_fd("cannot initialize pipe\n", 2);
 	else if (flag == 5)
 		ft_putstr_fd("cannot initialize fork\n", 2);
-	exit(EXIT_FAILURE);
+	exit(pipex->exit_status);
 }
 
-void	error_message_file(int flag)
+void	error_message_file(t_pipex *pipex, int flag)
 {
 	if (flag == 1)
 		perror("Error, file not found");
@@ -35,7 +35,7 @@ void	error_message_file(int flag)
 		perror("Error, cannot read file");
 	if (flag == 3)
 		perror("Error, cannot open file");
-	exit(flag);
+	exit(pipex->exit_status);
 }
 
 void	error_message_free(t_pipex *pipex, int flag)

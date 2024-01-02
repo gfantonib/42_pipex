@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_bonus.h                                    :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:08:36 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 12:08:52 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:34:56 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_pipex
 	int		fd_pipe[2];
 	int		nbr_of_cmds;
 	int		cmd_index;
+	int		exit_status;
 	char	*input_file;
 	char	*output_file;
 	t_cmd	*cmds_str;
@@ -44,9 +45,9 @@ typedef struct s_pipex
 void	get_cmds(t_pipex *pipex, char **argv, char **envp);
 char	*get_path(char *cmd, char **envp);
 
-void	error_message(int flag);
+void	error_message(t_pipex *pipex, int flag);
 void	error_message_free(t_pipex *pipex, int flag);
-void	error_message_file(int flag);
+void	error_message_file(t_pipex *pipex, int flag);
 void	close_all(t_pipex *pipex);
 
 void	get_fd_file(t_pipex *pipex, char **argv);

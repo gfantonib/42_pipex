@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:25 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 11:49:46 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:31:04 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_all(t_pipex *pipex, int i)
 		i++;
 	}
 	free(pipex->cmds_str);
-	exit(EXIT_FAILURE);
+	exit(pipex->exit_status);
 }
 
 void	free_cmd_array(t_cmd cmd_array)

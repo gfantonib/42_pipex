@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:48:41 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 11:48:59 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:40:16 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	exec_cmds(t_pipex *pipex)
 	while (i < pipex->nbr_of_cmds)
 	{
 		if (pipe(pipex->fd_pipe) < 0)
-			error_message(4);
+			error_message(pipex, 4);
 		pipex->cmds_str[i].pid = fork();
 		if (pipex->cmds_str[i].pid < 0)
-			error_message(5);
+			error_message(pipex, 5);
 		if (pipex->cmds_str[i].pid == 0)
 			exec_child(pipex, i);
 		else
@@ -31,6 +31,7 @@ void	exec_cmds(t_pipex *pipex)
 			dup2(pipex->fd_pipe[0], STDIN_FILENO);
 			close(pipex->fd_pipe[0]);
 			close(pipex->fd_pipe[1]);
+			waitpid(pipex->cmds_str[i].pid, &pipex->exit_status, WNOHANG);
 		}
 		free_cmd_array(pipex->cmds_str[i]);
 		i++;

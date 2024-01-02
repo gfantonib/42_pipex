@@ -41,6 +41,3 @@ Julio no pais das maravilhas."
 
 ./pipex file1 "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
 < file1 cat | tr ',' '\n' | sort | uniq | grep 'a' | tr 'a-z' 'A-Z' > file2
-
-
-

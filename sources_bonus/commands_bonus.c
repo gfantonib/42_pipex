@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:42:09 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 12:10:10 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:37:44 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_cmds(t_pipex *pipex, char **argv, char **envp)
 
 	pipex->cmds_str = (t_cmd *)malloc(sizeof(t_cmd) * pipex->nbr_of_cmds);
 	if (!pipex->cmds_str)
-		error_message(2);
+		error_message(pipex, 2);
 	set_to_null(pipex);
 	i = 0;
 	cmd_index = pipex->cmd_index;
