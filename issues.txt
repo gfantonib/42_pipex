@@ -14,7 +14,33 @@
 	EOF
 
 5. list of tests
-./bonus_pipex file1 "cat -e" "grep Melvin" file2
-./bonus_pipex file1 "ls -l" "grep file" "wc -l" file2
-./bonus_pipex file1  "cat" "tr , \n" "sort" "uniq" file2
+
+"cherry 
+apple 
+banana x
+banana
+Melvin num pais tropical.
+Julio no pais das maravilhas."
+
+./pipex file1 "ls -l" "wc -l" file2
+< file1 ls -l | wc -l > file2
+
+./pipex file1 "grep a1" "wc -w" file2
+< file1 grep a1 | wc -w > file2
+
+./pipex file1 "cat -e" "grep Melvin" file2
+< file1 cat -e | grep Melvin > file2
+
+./pipex file1 "ls -l" "grep file" "wc -l" file2
+< file1 ls -l | grep file | wc -l > file2
+
+"apple,banana,cherry,banana"
+
+./pipex file1  "cat" "tr , \n" "sort" "uniq" file2
+< file1  cat | tr ',' '\n' | sort | uniq > file2
+
+./pipex file1 "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
+< file1 cat | tr ',' '\n' | sort | uniq | grep 'a' | tr 'a-z' 'A-Z' > file2
+
+
 
