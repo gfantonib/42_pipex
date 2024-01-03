@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/03 09:46:31 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/03 10:14:39 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	error_message_free(t_pipex *pipex, int flag)
 	if (flag == 6)
 	{
 		pipex->exit_status = 127;
-		ft_putstr_fd("cannot get command path\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 	}
 	close_all(pipex);
 	free_all(pipex, 0);
