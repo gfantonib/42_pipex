@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:48:41 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 14:40:16 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:28:29 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void	exec_cmds(t_pipex *pipex)
 			dup2(pipex->fd_pipe[0], STDIN_FILENO);
 			close(pipex->fd_pipe[0]);
 			close(pipex->fd_pipe[1]);
+			close(pipex->fd_in);
 			waitpid(pipex->cmds_str[i].pid, &pipex->exit_status, WNOHANG);
 		}
 		free_cmd_array(pipex->cmds_str[i]);
 		i++;
 	}
-	close(STDIN_FILENO);
+	close_all(pipex);
 	free_all(pipex, i);
 }
 

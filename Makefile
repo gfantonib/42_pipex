@@ -73,4 +73,9 @@ re: fclean all
 
 re_bonus: fclean bonus
 
+val: 
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
+	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/* \
+	./pipex file1 "cat -e" "grep Melvin" file2
+
 .PHONY: all clean fclean re
