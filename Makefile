@@ -1,6 +1,6 @@
 NAME = pipex
 
-BONUS_NAME = bonus_pipex
+BONUS_NAME = pipex_bonus
 
 LIBFT = libft/libft.a
 
@@ -70,5 +70,7 @@ fclean: clean
 bonus: $(LIBFT) $(BONUS_NAME)
 
 re: fclean all
+
+re_bonus: fclean bonus
 
 .PHONY: all clean fclean re

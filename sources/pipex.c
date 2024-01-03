@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 14:34:02 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/03 09:58:03 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
+	initial_values(&pipex, argc);
 	if (argc != 5)
 		error_message(&pipex, 1);
-	initial_values(&pipex, argc);
 	get_fd_file(&pipex, argv);
 	get_cmds(&pipex, argv, envp);
 	exec_cmds(&pipex);
