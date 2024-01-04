@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:48:41 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:57:08 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:38:47 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ void	exec_initial(t_pipex *pipex, int i)
 	close(pipex->fd_pipe[0]);
 	dup2(pipex->fd_pipe[1], STDOUT_FILENO);
 	close(pipex->fd_pipe[1]);
-	if (execve(pipex->cmds_str[i].cmd_path, pipex->cmds_str[i].cmd, NULL) < 0)
-	{
-		close_all(pipex);
-		free_all(pipex, i);
-	}
+	if (!pipex->cmds_str[i].cmd_path)
+		pipex->exit_status = 127;
+	else
+		execve(pipex->cmds_str[i].cmd_path, pipex->cmds_str[i].cmd, NULL);
+	close_all(pipex);
+	free_all(pipex, i);
 }
 
 void	exec_mediate(t_pipex *pipex, int i)
@@ -68,11 +69,12 @@ void	exec_mediate(t_pipex *pipex, int i)
 	close(pipex->fd_pipe[0]);
 	dup2(pipex->fd_pipe[1], STDOUT_FILENO);
 	close(pipex->fd_pipe[1]);
-	if (execve(pipex->cmds_str[i].cmd_path, pipex->cmds_str[i].cmd, NULL) < 0)
-	{
-		close_all(pipex);
-		free_all(pipex, i);
-	}
+	if (!pipex->cmds_str[i].cmd_path)
+		pipex->exit_status = 127;
+	else
+		execve(pipex->cmds_str[i].cmd_path, pipex->cmds_str[i].cmd, NULL);
+	close_all(pipex);
+	free_all(pipex, i);
 }
 
 void	exec_final(t_pipex *pipex, int i)

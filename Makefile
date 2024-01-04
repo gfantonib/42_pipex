@@ -78,6 +78,6 @@ re_bonus: fclean bonus
 val: 
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
 	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/* \
-	./pipex_bonus file1 "ls -la ../../" "no" "cat" "nl" "tac" "echo salveee" file2
+	./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
 
 .PHONY: all clean fclean re
