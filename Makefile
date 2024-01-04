@@ -23,6 +23,7 @@ SRCS	= \
 			exec.c \
 			free.c \
 			error.c \
+			close.c \
 
 BONUS_SRCS	= \
 			pipex_bonus.c \
@@ -31,6 +32,7 @@ BONUS_SRCS	= \
 			exec_bonus.c \
 			free_bonus.c \
 			error_bonus.c \
+			close_bonus.c \
 
 OBJECTS_PATH = objects
 
@@ -76,6 +78,6 @@ re_bonus: fclean bonus
 val: 
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
 	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/* \
-	./pipex file1 "cat -e" "grep Melvin" file2
+	./pipex file1 "grep a1" "wc -w" file2
 
 .PHONY: all clean fclean re

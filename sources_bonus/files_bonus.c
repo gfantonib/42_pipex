@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:50 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 14:37:30 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:00:25 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	get_fd_output(t_pipex *pipex)
 	pipex->fd_out = open(pipex->output_file, \
 		O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->fd_out < 0)
-		error_message(pipex, 3);
+		error_message_file(pipex, 3);
 }

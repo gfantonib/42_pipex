@@ -6,13 +6,23 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/03 10:14:39 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:23:51 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void	error_message(t_pipex *pipex, int flag)
+void	error_message(t_pipex *pipex, int i, int flag)
+{
+	if (flag == 1)
+	{
+		ft_putstr_fd("command not found: ", 2);
+		ft_putstr_fd(pipex->cmds_str[i].cmd[0], 2);
+		ft_putstr_fd("\n", 2);
+	}
+}
+
+void	error_message_exit(t_pipex *pipex, int flag)
 {
 	if (flag == 1)
 		ft_putstr_fd("invalid parameter usage\n", 2);
@@ -47,12 +57,4 @@ void	error_message_free(t_pipex *pipex, int flag)
 	}
 	close_all(pipex);
 	free_all(pipex, 0);
-}
-
-void	close_all(t_pipex *pipex)
-{
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(pipex->fd_in);
-	close(pipex->fd_out);
 }

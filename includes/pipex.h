@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:35:18 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/02 14:30:09 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:28:51 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ typedef struct s_pipex
 void	get_cmds(t_pipex *pipex, char **argv, char **envp);
 char	*get_path(char *cmd, char **envp);
 
-void	error_message(t_pipex *pipex, int flag);
+void	error_message(t_pipex *pipex, int i, int flag);
+void	error_message_exit(t_pipex *pipex, int flag);
 void	error_message_free(t_pipex *pipex, int flag);
 void	error_message_file(t_pipex *pipex, int flag);
+
 void	close_all(t_pipex *pipex);
+void 	close_pipe_and_fdin(t_pipex *pipex);
 
 void	get_fd_file(t_pipex *pipex, char **argv);
 void	get_file_name(t_pipex *pipex, char **argv);
