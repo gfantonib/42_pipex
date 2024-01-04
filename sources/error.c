@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:25:33 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:41:41 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,4 @@ void	error_message_file(t_pipex *pipex, int flag)
 	if (flag == 3)
 		perror("Error, cannot open file");
 	exit(pipex->exit_status);
-}
-
-void	error_message_free(t_pipex *pipex, int flag)
-{
-	if (flag == 6)
-	{
-		pipex->exit_status = 127;
-		ft_putstr_fd("command not found\n", 2);
-	}
-	close_all(pipex);
-	free_all(pipex, 0);
 }
