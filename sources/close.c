@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   close.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/04 13:50:32 by gfantoni          #+#    #+#             */
+/*   Updated: 2024/01/04 13:50:59 by gfantoni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pipex.h"
 
 void	close_all(t_pipex *pipex)
@@ -8,7 +20,7 @@ void	close_all(t_pipex *pipex)
 	close(pipex->fd_out);
 }
 
-void close_pipe_and_fdin(t_pipex *pipex)
+void	close_pipe_and_fdin(t_pipex *pipex)
 {
 	close(pipex->fd_pipe[0]);
 	close(pipex->fd_pipe[1]);

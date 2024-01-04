@@ -6,16 +6,11 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:48:41 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:26:05 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:55:41 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-static void    get_exit_status(t_pipex *pipex)
-{
-	pipex->exit_status = (pipex->exit_status & 0xff00) >> 8;
-}
 
 void	exec_cmds(t_pipex *pipex)
 {
@@ -92,4 +87,3 @@ void	exec_final(t_pipex *pipex, int i)
 	close_all(pipex);
 	free_all(pipex, i);
 }
-

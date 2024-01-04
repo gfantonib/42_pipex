@@ -6,11 +6,16 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:41:33 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:57:23 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
+
+void	get_exit_status(t_pipex *pipex)
+{
+	pipex->exit_status = (pipex->exit_status & 0xff00) >> 8;
+}
 
 void	error_message(t_pipex *pipex, int i, int flag)
 {
