@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:57:23 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:22:02 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,5 @@ void	error_message_exit(t_pipex *pipex, int flag)
 		ft_putstr_fd("cannot initialize pipe\n", 2);
 	else if (flag == 5)
 		ft_putstr_fd("cannot initialize fork\n", 2);
-	exit(pipex->exit_status);
-}
-
-void	error_message_file(t_pipex *pipex, int flag)
-{
-	if (flag == 1)
-		perror("Error, file not found");
-	if (flag == 2)
-		perror("Error, cannot read file");
-	if (flag == 3)
-		perror("Error, cannot open file");
 	exit(pipex->exit_status);
 }
