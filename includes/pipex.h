@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:35:18 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 13:56:24 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:58:42 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*get_path(char *cmd, char **envp);
 void	error_message(t_pipex *pipex, int i, int flag);
 void	error_message_exit(t_pipex *pipex, int flag);
 void	error_message_free(t_pipex *pipex, int flag);
-void	error_message_file(t_pipex *pipex, int flag);
 void	get_exit_status(t_pipex *pipex);
 
 void	close_all(t_pipex *pipex);

@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:48:41 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 15:46:18 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:18:11 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	exec_child(t_pipex *pipex, int i)
 
 void	exec_initial(t_pipex *pipex, int i)
 {
+	if (pipex->fd_in < 0)
+	{
+		close_all(pipex);
+		free_all(pipex, i);
+	}
 	dup2(pipex->fd_in, STDIN_FILENO);
 	close(pipex->fd_pipe[0]);
 	dup2(pipex->fd_pipe[1], STDOUT_FILENO);
