@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:35:18 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 11:26:59 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:30:27 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../libs/libft/libft.h"
-# include "../libs/get_next_line/get_next_line.h"
 
 typedef struct s_cmd
 {

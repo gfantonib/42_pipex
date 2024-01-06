@@ -37,6 +37,7 @@ BONUS_SRCS	= \
 			free_bonus.c \
 			error_bonus.c \
 			close_bonus.c \
+			heredoc_bonus.c \
 
 OBJECTS_PATH = objects
 
@@ -46,7 +47,7 @@ OBJS	= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
 
 BONUS_OBJS	= $(addprefix $(BONUS_OBJECTS_PATH)/, $(BONUS_SRCS:%.c=%.o))
 
-all: $(LIBFT) $(GET_NEXT_LINE) $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
@@ -63,7 +64,7 @@ $(BONUS_OBJECTS_PATH)/%.o: $(BONUS_SOURCE_PATH)%.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(GET_NEXT_LINE) $(HEADERS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT) $(HEADERS) -o $(NAME)
 
 $(BONUS_NAME): $(BONUS_OBJS)
 	$(CC) $(BONUS_OBJS) $(LIBFT) $(GET_NEXT_LINE) $(HEADERS) -o $(BONUS_NAME)

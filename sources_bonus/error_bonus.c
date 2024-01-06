@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:49:12 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/05 18:22:02 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:34:47 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void	error_message_exit(t_pipex *pipex, int flag)
 		ft_putstr_fd("cannot initialize pipe\n", 2);
 	else if (flag == 5)
 		ft_putstr_fd("cannot initialize fork\n", 2);
+	else if (flag == 6)
+		ft_putstr_fd("invalid here_doc usage\n", 2);
 	exit(pipex->exit_status);
 }

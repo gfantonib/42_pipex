@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/04 10:03:34 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:44:21 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv, char **envp)
 	initial_values(&pipex, argc);
 	if (argc < 5)
 		error_message_exit(&pipex, 1);
+	else if (!ft_strncmp(argv[1], "here_doc", 8) && (argc < 6))
+		error_message_exit(&pipex, 2);
 	get_fd_file(&pipex, argv);
 	get_cmds(&pipex, argv, envp);
 	exec_cmds(&pipex);

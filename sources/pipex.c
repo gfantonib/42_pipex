@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 11:34:49 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:32:53 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,6 @@ int	main(int argc, char **argv, char **envp)
 	initial_values(&pipex, argc);
 	if (argc != 5)
 		error_message_exit(&pipex, 1);
-// ---------------------------------------------------------	
-	char	*line;
-	int		i;
-	int		fd1;
-
-	fd1 = open("melvin.txt", O_RDONLY);
-	i = 1;
-	while (i < 4)
-	{
-		line = get_next_line(fd1);
-		printf(" LINE [%02d]: %s", i, line);
-		free(line);
-		i++;
-	}
-	close(fd1);
-// ---------------------------------------------------------		
 	get_fd_file(&pipex, argv);
 	get_cmds(&pipex, argv, envp);
 	exec_cmds(&pipex);

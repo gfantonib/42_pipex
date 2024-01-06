@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:08:36 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 11:27:08 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:30:12 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_pipex
 	int		exit_status;
 	char	*input_file;
 	char	*output_file;
+	char	has_heredoc;
+	char	*limiter;
 	t_cmd	*cmds_str;
 }		t_pipex;
 
@@ -69,5 +71,7 @@ void	exec_final(t_pipex *pipex, int i);
 void	free_all(t_pipex *pipex, int i);
 void	free_cmd_array(t_cmd cmds_str);
 void	free_split(char **split);
+
+void	here_doc(t_pipex *pipex);
 
 #endif

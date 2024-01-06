@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 09:32:39 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 11:30:48 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:42:08 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*ft_strjoin_gnl(char *start, char *buff)
 	}
 	if (!start || !buff)
 		return (NULL);
-	ptr = (char *)malloc(1 + ft_strlen_gnl(start) + ft_strlen_gnl(buff) * sizeof(char));
+	ptr = (char *)malloc(1 + ft_strlen_gnl(start) \
+	+ ft_strlen_gnl(buff) * sizeof(char));
 	if (!ptr)
 		return (NULL);
 	ptr = ft_join_gnl(ptr, start, buff);
