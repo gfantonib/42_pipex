@@ -2,9 +2,13 @@ NAME = pipex
 
 BONUS_NAME = pipex_bonus
 
-LIBFT = libft/libft.a
+LIBFT = libs/libft/libft.a
 
-LIBFT_PATH = libft/
+LIBFT_PATH = libs/libft/
+
+GET_NEXT_LINE = libs/get_next_line/get_next_line.a
+
+GET_NEXT_LINE_PATH = libs/get_next_line/
 
 CFLAGS	= -Wextra -Wall -Werror -g
 
@@ -42,10 +46,13 @@ OBJS	= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
 
 BONUS_OBJS	= $(addprefix $(BONUS_OBJECTS_PATH)/, $(BONUS_SRCS:%.c=%.o))
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(GET_NEXT_LINE) $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
+
+$(GET_NEXT_LINE):
+	make -C $(GET_NEXT_LINE_PATH)
 
 $(OBJECTS_PATH)/%.o: $(SOURCE_PATH)%.c
 	$(MK) $(@D)
@@ -56,20 +63,22 @@ $(BONUS_OBJECTS_PATH)/%.o: $(BONUS_SOURCE_PATH)%.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) 
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(HEADERS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT) $(GET_NEXT_LINE) $(HEADERS) -o $(NAME)
 
 $(BONUS_NAME): $(BONUS_OBJS)
-	$(CC) $(BONUS_OBJS) $(LIBFT) $(HEADERS) -o $(BONUS_NAME)
+	$(CC) $(BONUS_OBJS) $(LIBFT) $(GET_NEXT_LINE) $(HEADERS) -o $(BONUS_NAME)
 
 clean:
 	rm -rf $(OBJECTS_PATH) $(BONUS_OBJECTS_PATH)
 	make clean -C $(LIBFT_PATH)
+	make clean -C $(GET_NEXT_LINE_PATH)
 
 fclean: clean
 	rm -rf $(NAME) $(BONUS_NAME)
 	make fclean -C $(LIBFT_PATH)
+	make fclean -C $(GET_NEXT_LINE_PATH)
 
-bonus: $(LIBFT) $(BONUS_NAME)
+bonus: $(LIBFT) $(GET_NEXT_LINE) $(BONUS_NAME)
 
 re: fclean all
 

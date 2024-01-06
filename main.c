@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 11:34:49 by gfantoni         ###   ########.fr       */
+/*   Created: 2023/08/17 09:00:29 by gfantoni          #+#    #+#             */
+/*   Updated: 2024/01/06 11:10:59 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "./get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-void	initial_values(t_pipex *pipex, int argc)
+int	main(void)
 {
-	pipex->nbr_of_cmds = argc - 3;
-	pipex->cmd_index = 2;
-	pipex->exit_status = 1;
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_pipex	pipex;
-
-	initial_values(&pipex, argc);
-	if (argc != 5)
-		error_message_exit(&pipex, 1);
-// ---------------------------------------------------------	
 	char	*line;
 	int		i;
 	int		fd1;
@@ -41,9 +30,5 @@ int	main(int argc, char **argv, char **envp)
 		i++;
 	}
 	close(fd1);
-// ---------------------------------------------------------		
-	get_fd_file(&pipex, argv);
-	get_cmds(&pipex, argv, envp);
-	exec_cmds(&pipex);
 	return (0);
 }

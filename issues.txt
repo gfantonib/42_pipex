@@ -1,19 +1,9 @@
-1.	Double error massege: every error occured inside a child process gets its specific
-	error masssege plus the general error massege after a waitpid with error sign.
-	ex: ./pipex file1 "grep patternN" "wc -w" file2
-
-2.	Simple quotation dont work: separate string not only by SPACE but by ' to.
+1.	Simple quotation dont work: separate string not only by SPACE but by ' to.
 	ex: ./pipex input2.txt "grep 'pattern'" "wc -w" output.txt
 
-3. Make error_massage output like the shell.
+2. list of tests
 
-4. How to use here_doc
-	$> cat -e <<EOF | grep line
-	Text to be passed to command1
-	line 2 of the input
-	EOF
-
-5. list of tests
+--------------------------------------------MANDATORY--------------------------------------------
 
 "cherry 
 apple 
@@ -31,13 +21,39 @@ Julio no pais das maravilhas."
 ./pipex file1 "cat -e" "grep Melvin" file2
 < file1 cat -e | grep Melvin > file2
 
-./pipex file1 "ls -l" "grep file" "wc -l" file2
+--------------------------------------------BONUS--------------------------------------------
+
+./pipex_bonus file1 "ls -l" "grep file" "wc -l" file2
 < file1 ls -l | grep file | wc -l > file2
 
 "apple,banana,cherry,banana"
 
-./pipex file1  "cat" "tr , \n" "sort" "uniq" file2
+./pipex_bonus file1  "cat" "tr , \n" "sort" "uniq" file2
 < file1  cat | tr ',' '\n' | sort | uniq > file2
 
 ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
 < file1 cat | tr ',' '\n' | sort | uniq | grep 'a' | tr 'a-z' 'A-Z' > file2
+
+--------------------------------------------HERE_DOC--------------------------------------------
+
+$> ./pipex_bonus here_doc AOF "cat -e" "grep melvin" file2
+cherry 
+apple 
+banana x
+banana
+Melvin num pais tropical.
+Julio no pais das maravilhas.
+AOF
+
+
+2.1 ">>" don't truncate output file.  
+$> cat -e << EOF | grep line >> file2
+Text to be passed to command1
+line 2 fucking of the input
+EOF
+
+2.2 ">" truncate ouput file.
+$> cat -e << EOF | grep line > file2
+Text to be passed to command1
+line 2 fucking of the input
+EOF
