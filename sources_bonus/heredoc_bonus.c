@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:40:53 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 14:55:46 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:11:48 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	here_doc(t_pipex *pipex)
 		if (!ft_strncmp(line, pipex->limiter, ft_strlen(pipex->limiter)))
 		{
 			free(line);
-			free(line); // WTF?
 			break ;
 		}
 		ft_putstr_fd(line, pipe_fd[1]);
 		free(line);
 	}
+	get_next_line(-1);
 	close(pipe_fd[1]);
 	pipex->fd_in = pipe_fd[0];
 }

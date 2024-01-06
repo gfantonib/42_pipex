@@ -6,84 +6,110 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 09:32:39 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 14:02:46 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:05:07 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-size_t	ft_strlen_gnl(char *str)
+size_t	ft_strlen_gnl(const char *s)
 {
-	size_t	i;
+	size_t	length;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
+	length = 0;
+	while (s[length] != '\0')
+	{
+		length++;
+	}
+	return (length);
 }
 
-char	*ft_strchr_gnl(char *s, int c)
+char	*ft_strncpy_gnl(char *dest, const char *src, size_t n)
 {
-	size_t	i;
+	size_t	index;
 
-	if (!s)
-		return (NULL);
-	if (c == 0)
+	index = 0;
+	while ((src[index] != '\0') && (index < n))
 	{
-		i = ft_strlen_gnl((char *)s);
-		return (&s[i]);
+		dest[index] = src[index];
+		index++;
 	}
-	i = 0;
-	while (s[i])
+	while (index < n)
 	{
-		if (s[i] == (char) c)
-			return (&s[i]);
-		i++;
+		dest[index] = '\0';
+		index++;
 	}
-	return (NULL);
-}
-
-char	*ft_join_gnl(char *dest, char *s1, char *s2)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (s1 && s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2 && s2[j])
-	{
-		dest [i + j] = s2[j];
-		j++;
-	}
-	dest [i + j] = '\0';
 	return (dest);
 }
 
-char	*ft_strjoin_gnl(char *start, char *buff)
+char	*ft_strchr_gnl(const char *s, int c)
 {
-	char	*ptr;
+	size_t	index;
+	char	*first_occ;
 
-	if (!start)
+	if (s == NULL)
+		return (NULL);
+	index = 0;
+	first_occ = NULL;
+	while (s[index] != '\0')
 	{
-		start = (char *)malloc(1 * sizeof(char));
-		if (!start)
-			return (NULL);
-		start[0] = '\0';
+		if (s[index] == (unsigned char)c)
+		{
+			first_occ = (char *)&s[index];
+			return (first_occ);
+		}
+		index++;
 	}
-	if (!start || !buff)
+	if ((unsigned char)c == '\0')
+	{
+		first_occ = (char *)&s[index];
+	}
+	return (first_occ);
+}
+
+char	*ft_strdup_gnl(const char *s)
+{
+	size_t	index;
+	char	*new_string;
+
+	new_string = malloc(ft_strlen_gnl(s) + 1);
+	index = 0;
+	if (new_string == NULL)
+	{
 		return (NULL);
-	ptr = (char *)malloc(1 + ft_strlen_gnl(start) \
-	+ ft_strlen_gnl(buff) * sizeof(char));
-	if (!ptr)
+	}
+	while (s[index])
+	{
+		new_string[index] = s[index];
+		index++;
+	}
+	new_string[index] = '\0';
+	return (new_string);
+}
+
+char	*ft_strjoin_gnl(char *s1, char *s2)
+{
+	int		new_index;
+	int		index;
+	char	*new;
+
+	if (s1 == NULL)
+		s1 = ft_strdup_gnl("");
+	new = malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1) * sizeof(char));
+	if (new == NULL)
 		return (NULL);
-	ptr = ft_join_gnl(ptr, start, buff);
-	free(start);
-	return (ptr);
+	new_index = 0;
+	index = 0;
+	while (s1[index])
+	{
+		new[new_index++] = s1[index++];
+	}
+	index = 0;
+	while (s2[index])
+	{
+		new[new_index++] = s2[index++];
+	}
+	new[new_index] = '\0';
+	free((char *)s1);
+	return (new);
 }

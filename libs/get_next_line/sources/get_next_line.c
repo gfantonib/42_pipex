@@ -6,102 +6,101 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 09:32:42 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 14:02:53 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:04:46 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-char	*ft_move_start(char *start)
-{
-	char	*new_buff;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (start[i] && start[i] != '\n')
-		i++;
-	if (start[i] == '\0')
-	{
-		free(start);
-		return (NULL);
-	}
-	i += (start[i] == '\n');
-	new_buff = (char *)malloc(1 + ft_strlen_gnl(start) - i);
-	if (!new_buff)
-		return (NULL);
-	j = 0;
-	while (start[i + j])
-	{
-		new_buff[j] = start[i + j];
-		j++;
-	}
-	new_buff[j] = '\0';
-	free (start);
-	return (new_buff);
-}
-
-char	*ft_readed_line(char *start)
-{
-	int		i;
-	char	*line;
-
-	if (!start || ! start[0])
-		return (NULL);
-	i = 0;
-	while (start[i] && start[i] != '\n')
-		i++;
-	if (start[i] == '\n')
-		i++;
-	line = (char *)malloc(1 + i * sizeof(char));
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (start[i] && start[i] != '\n')
-	{
-		line[i] = start[i];
-		i++;
-	}
-	if (start[i] == '\n')
-		line[i++] = '\n';
-	line[i] = '\0';
-	return (line);
-}
-
-char	*ft_get_line(int fd, char *tmp, char **start_str)
-{
-	int			fd_read;
-
-	fd_read = 1;
-	while (!(ft_strchr_gnl(*start_str, '\n')) && fd_read != 0)
-	{
-		fd_read = read(fd, tmp, BUFFER_SIZE);
-		if (fd_read == -1)
-		{
-			free(tmp);
-			free(*start_str);
-			*start_str = NULL;
-			return (NULL);
-		}
-		tmp[fd_read] = '\0';
-		*start_str = ft_strjoin_gnl(*start_str, tmp);
-	}
-	free(tmp);
-	tmp = ft_readed_line(*start_str);
-	*start_str = ft_move_start(*start_str);
-	return (tmp);
-}
+static char	*ft_fill_buffer(int fd, char *total_buffer);
+static char	*ft_get_current_line(char *total_buffer);
+static char	*ft_get_buffer_rest(char *total_buffer);
 
 char	*get_next_line(int fd)
 {
-	char		*tmp;
-	static char	*start_str[1024];
+	static char	*total_buffer;
+	char		*current_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
+	{
+		if (fd < 0)
+			free(total_buffer);
 		return (NULL);
-	tmp = (char *)malloc(1 + BUFFER_SIZE * sizeof(char));
-	if (!tmp)
+	}
+	total_buffer = ft_fill_buffer(fd, total_buffer);
+	if (total_buffer == NULL)
 		return (NULL);
-	tmp = ft_get_line(fd, tmp, &start_str[fd]);
-	return (tmp);
+	current_line = NULL;
+	current_line = ft_get_current_line(total_buffer);
+	total_buffer = ft_get_buffer_rest(total_buffer);
+	return (current_line);
+}
+
+static char	*ft_fill_buffer(int fd, char *total_buffer)
+{
+	char	*temp_buffer;
+	int		byte_nb;
+
+	temp_buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (temp_buffer == NULL)
+		return (NULL);
+	byte_nb = 1;
+	while (!(ft_strchr_gnl(total_buffer, '\n')) && (byte_nb != 0))
+	{
+		byte_nb = read(fd, temp_buffer, BUFFER_SIZE);
+		if (byte_nb < 0)
+		{
+			free(temp_buffer);
+			free(total_buffer);
+			return (NULL);
+		}
+		temp_buffer[byte_nb] = '\0';
+		total_buffer = ft_strjoin_gnl(total_buffer, temp_buffer);
+	}
+	free(temp_buffer);
+	return (total_buffer);
+}
+
+static char	*ft_get_current_line(char *total_buffer)
+{
+	char	*current_line;
+	char	*newline_position;
+	size_t	line_len;
+
+	if (total_buffer[0] == '\0')
+		return (NULL);
+	newline_position = ft_strchr_gnl(total_buffer, '\n');
+	if (newline_position != NULL)
+	{
+		line_len = 0;
+		while (&total_buffer[line_len] != newline_position)
+			line_len++;
+	}
+	else
+		line_len = ft_strlen_gnl(total_buffer);
+	current_line = malloc((line_len + 2) * sizeof(char));
+	if (current_line == NULL)
+		return (NULL);
+	current_line = ft_strncpy_gnl(current_line, total_buffer, line_len);
+	if (newline_position != NULL)
+	{
+		current_line[line_len++] = '\n';
+	}
+	current_line[line_len] = '\0';
+	return (current_line);
+}
+
+static char	*ft_get_buffer_rest(char *total_buffer)
+{
+	char	*rest;
+	char	*newline_position;
+
+	rest = NULL;
+	newline_position = ft_strchr_gnl(total_buffer, '\n');
+	if (newline_position != NULL)
+	{
+		rest = ft_strdup_gnl(newline_position + 1);
+	}
+	free(total_buffer);
+	return (rest);
 }

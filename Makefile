@@ -90,4 +90,4 @@ val:
 	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/* \
 	./pipex_bonus here_doc AOF "cat -e" "grep melvin" file2
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re val
