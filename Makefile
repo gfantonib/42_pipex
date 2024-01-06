@@ -43,7 +43,7 @@ OBJECTS_PATH = objects
 
 BONUS_OBJECTS_PATH = bonus_objects
 
-OBJS	= $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
+OBJS = $(addprefix $(OBJECTS_PATH)/, $(SRCS:%.c=%.o))
 
 BONUS_OBJS	= $(addprefix $(BONUS_OBJECTS_PATH)/, $(BONUS_SRCS:%.c=%.o))
 
@@ -88,6 +88,6 @@ re_bonus: fclean bonus
 val: 
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
 	--trace-children=yes --trace-children-skip=*/bin/*,*/sbin/* \
-	./pipex file1 "cat" "grep x" bad_out
+	./pipex_bonus here_doc AOF "cat -e" "grep melvin" file2
 
 .PHONY: all clean fclean re

@@ -6,11 +6,11 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 09:32:39 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 12:42:08 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:02:46 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 size_t	ft_strlen_gnl(char *str)
 {
