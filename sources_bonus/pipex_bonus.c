@@ -6,7 +6,7 @@
 /*   By: gfantoni <gfantoni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:40:33 by gfantoni          #+#    #+#             */
-/*   Updated: 2024/01/06 12:44:21 by gfantoni         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:34:31 by gfantoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	initial_values(t_pipex *pipex, int argc)
 	pipex->nbr_of_cmds = argc - 3;
 	pipex->cmd_index = 2;
 	pipex->exit_status = 1;
+	pipex->has_heredoc = 'F';
 }
 
 int	main(int argc, char **argv, char **envp)
