@@ -116,5 +116,4 @@ val_bonus:
 # big cmd line error in cmd 4
 	$(VAL) ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniqQ" "grep a" "tr a-z A-Z" file2
 
-
 .PHONY: all clean fclean re val val_bonus
