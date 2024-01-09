@@ -88,52 +88,33 @@ re: fclean all
 
 re_bonus: fclean bonus
 
-val_1:
+val:
 # normal_1
 	$(VAL) ./pipex file1 "ls -l" "wc -l" file2
-
-val_2:
 # normal_2
 	$(VAL) ./pipex file1 "grep a1" "wc -w" file2
-
-val_3:
 # infile dont't exist
 	$(VAL) ./pipex file "grep a1" "wc -w" file2
-
-val_4:
 # outfile don't exist
 	$(VAL) ./pipex file1 "grep a1" "wc -w" outfile
-
-val_5:
 # error in first cmd
 	$(VAL) ./pipex file1 "grepP a1" "wc -w" file2
-
-val_6: 
 # error in second cmd
 	$(VAL) ./pipex file1 "grep a1" "wcC -w" file2
 
-val_bonus_1:
+val_bonus:
 # big cmd line
 	$(VAL) ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
-
-val_bonus_2:
 # small cmd line
 	$(VAL) ./pipex_bonus file1 "ls -l" "wc -l" file2
-
-val_bonus_3:
 # here_doc small
 	$(VAL) ./pipex_bonus here_doc limiter "cat -e" "grep melvin" file2
-
-val_bonus_4:
 # here_doc big
 	$(VAL) ./pipex_bonus here_doc limiter "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
-
-val_bonus_5:
 # here_doc big error and error in cmd 3
 	$(VAL) ./pipex_bonus here_doc limiter "cat" "tr , \n" "sortT" "uniq" "grep a" "tr a-z A-Z" file2
-
-val_bonus_6:
 # big cmd line error in cmd 4
 	$(VAL) ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniqQ" "grep a" "tr a-z A-Z" file2
 
-.PHONY: all clean fclean re val
+
+.PHONY: all clean fclean re val val_bonus
