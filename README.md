@@ -15,6 +15,59 @@ It must behave exactly the same as the shell command below:
 $ < file1 cmd1 | cmd2 > file2
 ```
 
+# Some tests
+Mandatory
+### normal_1
+``` sh
+./pipex file1 "ls -l" "wc -l" file2
+```
+### normal_2
+``` sh
+./pipex file1 "grep a1" "wc -w" file2
+```
+### infile dont't exist
+``` sh
+./pipex file "grep a1" "wc -w" file2
+```
+### outfile don't exist
+``` sh
+./pipex file1 "grep a1" "wc -w" outfile
+```
+### error in first cmd
+``` sh
+./pipex file1 "grepP a1" "wc -w" file2
+```
+### error in second cmd
+``` sh
+./pipex file1 "grep a1" "wcC -w" file2
+```
+
+Bonus
+### big cmd line
+``` sh
+./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
+```
+### small cmd line
+``` sh
+./pipex_bonus file1 "ls -l" "wc -l" file2
+```
+### here_doc small
+``` sh
+./pipex_bonus here_doc limiter "cat -e" "grep melvin" file2
+```
+### here_doc big
+``` sh
+./pipex_bonus here_doc limiter "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
+```
+### here_doc big error and error in cmd 3
+``` sh
+./pipex_bonus here_doc limiter "cat" "tr , \n" "sortT" "uniq" "grep a" "tr a-z A-Z" file2
+```
+### big cmd line error in cmd 4
+``` sh
+./pipex_bonus file1 "cat" "tr , \n" "sort" "uniqQ" "grep a" "tr a-z A-Z" file2
+```
+
 # References
 ### CodeVault
 https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY
