@@ -16,7 +16,7 @@ $ < file1 cmd1 | cmd2 > file2
 ```
 
 # Some tests
-Mandatory
+## Mandatory
 ### normal_1
 ``` sh
 ./pipex file1 "ls -l" "wc -l" file2
@@ -42,7 +42,7 @@ Mandatory
 ./pipex file1 "grep a1" "wcC -w" file2
 ```
 
-Bonus
+## Bonus
 ### big cmd line
 ``` sh
 ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
@@ -59,11 +59,11 @@ Bonus
 ``` sh
 ./pipex_bonus here_doc limiter "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
 ```
-### here_doc big error and error in cmd 3
+### here_doc big and error in cmd 3
 ``` sh
 ./pipex_bonus here_doc limiter "cat" "tr , \n" "sortT" "uniq" "grep a" "tr a-z A-Z" file2
 ```
-### big cmd line error in cmd 4
+### big cmd line and error in cmd 4
 ``` sh
 ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniqQ" "grep a" "tr a-z A-Z" file2
 ```
