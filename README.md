@@ -22,51 +22,52 @@ $ < file1 cmd1 | cmd2 > file2
 ./pipex file1 "ls -l" "wc -l" file2
 < file1 ls -l | wc - l > file2
 ```
-### normal_2
-``` sh
-./pipex file1 "grep a1" "wc -w" file2
-```
 ### infile dont't exist
 ``` sh
-./pipex file "grep a1" "wc -w" file2
+./pipex no_file "grep a1" "wc -w" file2
+< no_file grep a1 | wc -w > file2
 ```
 ### outfile don't exist
 ``` sh
 ./pipex file1 "grep a1" "wc -w" outfile
+< file1 grep a1 | wc -w > outfile
 ```
 ### error in first cmd
 ``` sh
 ./pipex file1 "grepP a1" "wc -w" file2
+< file1 grepP a1 | wc -w > file2
 ```
 ### error in second cmd
 ``` sh
 ./pipex file1 "grep a1" "wcC -w" file2
+< file1 grep a1 | wcC -w > file2
 ```
 
 ## Bonus
 ### big cmd line
 ``` sh
 ./pipex_bonus file1 "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
+< file1 cat | tr ',' '\n' | sort | uniq | grep a | tr 'a-z' 'A-Z' > file2
 ```
 ### small cmd line
 ``` sh
 ./pipex_bonus file1 "ls -l" "wc -l" file2
+< file1 | ls -l | wc -l > file2
 ```
 ### here_doc small
 ``` sh
 ./pipex_bonus here_doc limiter "cat -e" "grep melvin" file2
+cat -e << limiter | grep melvin >> file2
 ```
 ### here_doc big
 ``` sh
 ./pipex_bonus here_doc limiter "cat" "tr , \n" "sort" "uniq" "grep a" "tr a-z A-Z" file2
+cat << limiter | tr ',' '\n' | sort | uniq | grep a | tr 'a-z' 'A-Z' >> file2
 ```
 ### here_doc big and error in cmd 3
 ``` sh
 ./pipex_bonus here_doc limiter "cat" "tr , \n" "sortT" "uniq" "grep a" "tr a-z A-Z" file2
-```
-### big cmd line and error in cmd 4
-``` sh
-./pipex_bonus file1 "cat" "tr , \n" "sort" "uniqQ" "grep a" "tr a-z A-Z" file2
+cat << limiter | tr ',' '\n' | sortT | uniq | grep a | tr 'a-z' 'A-Z' >> file2
 ```
 
 # References
