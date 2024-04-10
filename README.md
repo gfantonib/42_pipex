@@ -1,5 +1,9 @@
 # 42_pipex
 
+<div align="center">
+  <img src="image/pipex.png" alt="Pipex">
+</div>
+
 <p align="center">
   <img src="https://1.bp.blogspot.com/-4R8XL3LCi1A/Xi-_FwlS1vI/AAAAAAAAQdo/RLf7eZCAWO4QOm8oR1Wn99C21nrjnxBuwCLcBGAsYHQ/s1600/images.jpeg" 
   alt="Image Description">
